@@ -31,4 +31,15 @@ public class UserService implements UserDetailsService {
 						.roles(user.getRole())
 						.build();
 	}
+
+	/**
+	 * 
+	 * @param username -> 이름
+	 * @param rawPassword -> 비번
+	 * @param role -> 역할
+	 */
+	public void registerUser(String username, String rawPassword, String role) {
+		String encodedPassword = passwordEncoder.encode(rawPassword); // ✅ 평문을 암호화
+		userMapper.insertUser(username, encodedPassword, role);
+	}
 }

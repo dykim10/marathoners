@@ -8,5 +8,6 @@ import org.project.marathoners.entity.User;
 public interface UserMapper {
 	@Select("SELECT * FROM users WHERE username = #{username}")
 	User findByUsername(String username);
-	
+
+    void insertUser(String username, String encodedPassword, String role);
 }
