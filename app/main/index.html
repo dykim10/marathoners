@@ -1,13 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>마라톤 사이트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css">
 </head>
 <body>
-<div id="root">
-    메[인페이지
+<div class="ui fixed menu">
+    <div class="ui container">
+        <a href="#" class="header item">마라톤 사이트</a>
+        <a href="#" class="item">홈</a>
+        <a href="#" class="item">대회 일정</a>
+        <a href="#" class="item">참가 신청</a>
+        <a href="#" class="item">문의하기</a>
+    </div>
 </div>
+
+<div class="ui container" style="margin-top: 60px;">
+    <div class="ui segment">
+        <h1 class="ui header">마라톤 대회에 참여하세요!</h1>
+        <p>최고의 경험을 선사할 마라톤 대회가 여러분을 기다립니다.</p>
+        <button class="ui primary button">참가 신청</button>
+    </div>
+</div>
+
+<div class="ui container">
+    <h2 class="ui header">다가오는 대회</h2>
+    <div class="ui three stackable cards">
+        <div class="card">
+            <div class="content">
+                <div class="header">서울 마라톤</div>
+                <div class="description">2025년 3월 10일 - 서울</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <div class="header">부산 마라톤</div>
+                <div class="description">2025년 4월 5일 - 부산</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <div class="header">대구 마라톤</div>
+                <div class="description">2025년 5월 20일 - 대구</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
 </body>
 </html>
