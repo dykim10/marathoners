@@ -18,7 +18,7 @@ public class MyBatisConfig {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
 
-        // ✅ 여러 개의 매퍼 파일을 자동으로 등록
+        //여러 개의 매퍼 파일을 자동으로 등록 mapper 관리
         factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath:/mappers/*.xml"));
 
