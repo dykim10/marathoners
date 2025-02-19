@@ -1,6 +1,6 @@
 export const metadata = {
-    title: "My Next.js App",
-    description: "Next.js와 Spring Boot를 연결한 프로젝트",
+    title: "Marathoners ",
+    description: "Next.js와 Spring Boot를 연결하여 공부 및 서비스를 목표로 하는 프로젝트",
 };
 
 export default function RootLayout({ children }) {
