@@ -1,0 +1,29 @@
+spring:
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+
+    h2:
+        console:
+            enabled: true  # H2 ? ?? ???
+
+    sql:
+        init:
+            mode: always  # ?? SQL ???? ??
+            schema-locations: classpath:db/schema.sql
+            data-locations: classpath:db/data.sql
+
+    springdoc:
+        api-docs:
+            path: /api-docs
+        swagger-ui:
+            path: /swagger-ui.html
+
+    logging:
+        level:
+            root: INFO
+            com.project.marathon.repository: DEBUG  # MyBatis Repository ?? ???
+            org.mybatis: DEBUG                      # MyBatis ?? ?? ???
+            org.apache.ibatis: TRACE                # MyBatis SQL ?? ?? ??

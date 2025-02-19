@@ -1,0 +1,15 @@
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/> <!-- MyBatis SQL 실행 로그 활성화 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 패키지별 타입 별칭 설정 -->
+    <typeAliases>
+        <package name="com.project.marathon.entity"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mappers/MessageMapper.xml"/>
+    </mappers>
+</configuration>
