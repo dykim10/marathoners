@@ -1,7 +1,10 @@
 HELP.md
 .gradle
 build/
+# Gradle Wrapper 관련 파일은 반드시 포함시켜야 함
 !gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
 !**/src/main/**/build/
 !**/src/test/**/build/
 
