@@ -1,3 +1,6 @@
+server:
+    port: ${PORT:8080}
+
 spring:
     datasource:
         url: jdbc:h2:mem:testdb
@@ -7,7 +10,7 @@ spring:
 
     h2:
         console:
-            enabled: true  # H2 ? ?? ???
+            enabled: true  # H2
 
     sql:
         init:
