@@ -46,6 +46,7 @@ npm-debug.log
 yarn-error.log
 .env
 .env.local
+.env.production
 
 # Java & Gradle 관련
 target/
