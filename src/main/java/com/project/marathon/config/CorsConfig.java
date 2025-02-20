@@ -13,7 +13,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins(
+                            "http://localhost:3000"
+                            , "https://port-next-frontend-m7cqh44n99825c47.sel4.cloudtype.app"
+                        )
                         .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS")
                         .allowCredentials(true);
             }
