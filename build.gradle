@@ -39,16 +39,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // H2 Database
-    implementation 'com.h2database:h2'
-    runtimeOnly 'com.h2database:h2'
-
     // Swagger (Springdoc OpenAPI)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
     runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
+    runtimeOnly 'org.postgresql:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
