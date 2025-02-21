@@ -23,6 +23,7 @@ spring:
             com.project.marathon.repository: DEBUG  # MyBatis Repository
             org.mybatis: DEBUG                      # MyBatis
             org.apache.ibatis: TRACE                # MyBatis SQL
+            org.springframework.security: DEBUG
     security:
         user:
             name: admin  # 기본 로그인 사용자

@@ -1,5 +1,7 @@
 package com.project.marathon.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,6 +9,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +24,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     // ✅ AuthenticationManager 등록
     @Bean
@@ -80,10 +84,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(withDefaults()) // CORS 설정 적용
-                .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화 (테스트용)
+                .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT 사용 시 필요
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login").permitAll() // 로그인 엔드포인트는 인증 없이 허용
+                        .requestMatchers("/api/login", "/api/public/**").permitAll() // 로그인 API 인증 없이 허용
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            logger.error("🚨 403 Forbidden 발생! 요청 URL: {}", request.getRequestURI());
+                            response.sendError(403, "접근이 거부되었습니다.");
+                        })
                 );
 
         return http.build();

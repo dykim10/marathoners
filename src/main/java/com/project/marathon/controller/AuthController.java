@@ -3,6 +3,8 @@ package com.project.marathon.controller;
 import com.project.marathon.dto.ErrorResponse;
 import com.project.marathon.dto.UserResponse;
 import com.project.marathon.service.AuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -22,9 +24,8 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
         String userId = loginRequest.get("userId");
         String password = loginRequest.get("password");
-
-        System.out.println("11111111");
-
+        logger.info("!11111111111111111111111111");
+        System.out.println("!23412341234");
         // ✅ 인증 서비스 호출
         UserResponse authResponse = authService.login(userId, password);
 
@@ -36,3 +37,4 @@ public class AuthController {
         return ResponseEntity.ok(authResponse);
     }
 }
+
