@@ -11,5 +11,6 @@
 
     <mappers>
         <mapper resource="mappers/MessageMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
     </mappers>
 </configuration>

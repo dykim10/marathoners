@@ -22,8 +22,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        User user = userMapper.findByUserId(userId)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + userId));
+        User user = userMapper.findByUserId(userId);
+        if (user == null) {
+            logger.error("❌ 인증 실패: 사용자를 찾을 수 없습니다1111. userId={}", userId);
+            throw new RuntimeException("인증 실패: 아이디 또는 비밀번호가 올바르지 않습니다.");
+        }
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUserId(),

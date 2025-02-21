@@ -25,4 +25,5 @@ public class MyBatisConfig {
         factoryBean.setTypeAliasesPackage("com.project.marathon.entity"); // DTO 자동 매핑
         return factoryBean.getObject();
     }
+
 }

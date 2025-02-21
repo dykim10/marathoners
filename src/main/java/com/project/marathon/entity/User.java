@@ -1,9 +1,16 @@
 package com.project.marathon.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Data  // Lombok 사용 (Getter/Setter 자동 생성)
 public class User {
     private UUID userUuid = UUID.randomUUID(); // UUID 기본값 설정
