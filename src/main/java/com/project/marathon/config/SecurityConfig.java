@@ -79,11 +79,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(withDefaults()) // CORS 적용
-                .csrf(csrf -> csrf.disable()) // CSRF 비활성화 (JWT 사용 시 필요)
+                .cors(withDefaults()) // CORS 설정 적용
+                .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화 (테스트용)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll() // API 엔드포인트는 인증 없이 접근 허용
-                        .anyRequest().authenticated() // 나머지 요청은 인증 필요
+                        .requestMatchers("/api/login").permitAll() // 로그인 엔드포인트는 인증 없이 허용
+                        .anyRequest().authenticated()
                 );
 
         return http.build();

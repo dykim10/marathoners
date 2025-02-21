@@ -14,13 +14,14 @@ export default function LoginPage() {
         setError("");
 
         try {
-            const response = await fetch("/api/login", { // Next.js API Route 사용
+            // Next.js API Route 호출 (Spring Boot API가 아니라!)
+            const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                 },
-                credentials: "include", // 세션 인증 유지
+                credentials: "include",
                 body: JSON.stringify({ userId, password }),
             });
 
@@ -29,8 +30,8 @@ export default function LoginPage() {
             }
 
             const data = await response.json();
-            localStorage.setItem("token", data.token);  // JWT 저장 (필요할 경우)
-            router.push("/");  // 로그인 성공 후 메인 페이지 이동
+            localStorage.setItem("token", data.token);
+            router.push("/");
         } catch (error) {
             setError(error.message);
         }
@@ -61,20 +62,20 @@ export default function LoginPage() {
             </form>
 
             <style jsx>{`
-        .login-container {
-          text-align: center;
-          margin-top: 50px;
-        }
-        input {
-          display: block;
-          margin: 10px auto;
-          padding: 10px;
-          width: 200px;
-        }
-        .error {
-          color: red;
-        }
-      `}</style>
+                .login-container {
+                    text-align: center;
+                    margin-top: 50px;
+                }
+                input {
+                    display: block;
+                    margin: 10px auto;
+                    padding: 10px;
+                    width: 200px;
+                }
+                .error {
+                    color: red;
+                }
+            `}</style>
         </div>
     );
 }

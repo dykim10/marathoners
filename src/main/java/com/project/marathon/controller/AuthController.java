@@ -23,6 +23,8 @@ public class AuthController {
         String userId = loginRequest.get("userId");
         String password = loginRequest.get("password");
 
+        System.out.println("11111111");
+
         // ✅ 인증 서비스 호출
         UserResponse authResponse = authService.login(userId, password);
 

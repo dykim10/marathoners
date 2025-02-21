@@ -1,26 +1,31 @@
-/*
-    Next.js에서 API 요청을 받아 Spring Boot로 프록시
-    CORS 문제 없이 Next.js가 백엔드와 통신
-    fetch("/api/login")이 Next.js 내부 API로 연결됨
-*/
 export async function POST(req) {
-    const { userId, password } = await req.json();
+    try {
+        const { userId, password } = await req.json();
+        console.log("🔹 Next.js API Route에서 Spring Boot 요청 시도:", { userId, password });
+        const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot 서버 URL
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot API URL
-    const response = await fetch(`${API_URL}/api/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-        credentials: "include",  // 세션 유지
-        body: JSON.stringify({ userId, password }),
-    });
+        const response = await fetch(`${API_URL}/api/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            credentials: "include",  // 세션 유지
+            body: JSON.stringify({ userId, password }),
+        });
 
-    if (!response.ok) {
-        return Response.json({ error: "로그인 실패" }, { status: response.status });
+        console.log("🔹 Spring Boot 응답 상태 코드:", response.status);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.log("❌ Spring Boot 응답 내용:", errorText);
+            return Response.json({ error: "로그인 실패", detail: errorText }, { status: response.status });
+        }
+
+        const data = await response.json();
+        return Response.json(data);
+    } catch (error) {
+        console.error("❌ Next.js API Route 내부 오류:", error);
+        return Response.json({ error: "서버 오류 발생" }, { status: 500 });
     }
-
-    const data = await response.json();
-    return Response.json(data);
 }
