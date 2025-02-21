@@ -10,7 +10,7 @@ public class User {
     private String userId;                  // 유저 아이디
     private String userEmail;               // 유저 이메일 주소
     private String userName;                // 유저 성명
-    private String userPwd;                 // 유저 비밀번호
+    private String userPassword;                 // 유저 비밀번호
     private String userHp;                  // 휴대전화번호
     private LocalDateTime userRegDt;        // 유저 가입일
     private LocalDateTime userUnRegDt;      // 유저 탈퇴일

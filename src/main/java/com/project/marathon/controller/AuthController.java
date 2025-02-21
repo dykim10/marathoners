@@ -24,12 +24,11 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
         String userId = loginRequest.get("userId");
         String password = loginRequest.get("password");
-        logger.info("!11111111111111111111111111");
-        System.out.println("!23412341234");
         logger.info("🔹 로그인 요청: userId={}, password=****", userId);
 
         // ✅ 인증 서비스 호출
-        UserResponse authResponse = authService.login(userId, password);
+        //UserResponse authResponse = authService.login(userId, password);
+        String authResponse = authService.login(userId, password);
 
         if (authResponse == null) {
             return ResponseEntity.status(401).body(new ErrorResponse(401, "인증 실패: 아이디 또는 비밀번호가 올바르지 않습니다."));

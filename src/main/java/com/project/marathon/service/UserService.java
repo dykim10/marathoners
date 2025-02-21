@@ -1,7 +1,7 @@
 package com.project.marathon.service;
 
 import com.project.marathon.entity.User;
-import com.project.marathon.repository.UserRepository;
+import com.project.marathon.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -9,17 +9,17 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
     public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userMapper.findByUsername(username);
     }
 
     public void updateLastLogin(String userId) {
-        userRepository.lastLoginDateUpdate(userId);
+        userMapper.lastLoginDateUpdate(userId);
     }
 }

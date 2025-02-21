@@ -10,7 +10,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan("com.project.marathon.repository")  // Mapper 인터페이스 자동 감지
+@MapperScan("com.project.marathon.mapper")  // Mapper 인터페이스 자동 감지
 public class MyBatisConfig {
 
     @Bean

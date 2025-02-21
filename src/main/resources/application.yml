@@ -3,8 +3,8 @@ server:
 
 spring:
     datasource:
-        url: jdbc:postgresql://svc.sel4.cloudtype.app:32708/marathoners
-        driver-class-name: org.postgresql.Driver
+        url: jdbc:p6spy:postgresql://svc.sel4.cloudtype.app:32708/marathoners
+        driver-class-name: com.p6spy.engine.spy.P6SpyDriver  # ✅ P6Spy 드라이버로 변경
         username: root
         password: 1q2w3e4r!!
     sql:
@@ -20,10 +20,12 @@ spring:
     logging:
         level:
             root: INFO
-            com.project.marathon.repository: DEBUG  # MyBatis Repository
+            com.project.marathon.mapper: DEBUG  # MyBatis Repository
             org.mybatis: DEBUG                      # MyBatis
             org.apache.ibatis: TRACE                # MyBatis SQL
             org.springframework.security: DEBUG
+            p6spy: DEBUG  # ✅ P6Spy의 SQL 로그 활성화
+
     security:
         user:
             name: admin  # 기본 로그인 사용자

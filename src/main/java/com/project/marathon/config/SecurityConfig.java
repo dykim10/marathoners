@@ -1,6 +1,6 @@
 package com.project.marathon.config;
 
-import com.project.marathon.repository.UserRepository;
+import com.project.marathon.mapper.UserMapper;
 import com.project.marathon.security.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,8 @@ public class SecurityConfig {
 
     //사용자 정보 서비스 설정
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new CustomUserDetailsService(userRepository);
+    public UserDetailsService userDetailsService(UserMapper userMapper) {
+        return new CustomUserDetailsService(userMapper);
     }
 
     //패스워드 암호화 설정 (BCrypt 사용)

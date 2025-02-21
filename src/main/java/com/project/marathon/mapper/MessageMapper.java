@@ -1,12 +1,11 @@
-package com.project.marathon.repository;
+package com.project.marathon.mapper;
 
 import com.project.marathon.entity.Message;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface MessageRepository {
+public interface MessageMapper {
 
     List<Message> findAll();
     Optional<Message> findByContent(String content);

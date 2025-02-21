@@ -52,7 +52,7 @@ export default function LoginPage() {
                 />
                 <input
                     type="password"
-                    id="userPwd"
+                    id="userPassword"
                     placeholder="비밀번호"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
