@@ -14,5 +14,5 @@ public interface UserMapper {
     User findByUserId(@Param("userId") String userId);
 
     //마지막로그인시간 업데이트
-    void lastLoginDateUpdate(String userId);
+    User lastLoginDateUpdate(String userId);
 }

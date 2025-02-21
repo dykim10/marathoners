@@ -63,7 +63,7 @@ public class AuthService {
             String token = jwtTokenProvider.generateToken(authentication);
 
             // ✅ 마지막 로그인 시간 업데이트
-            userService.updateLastLogin(user.getUserId());
+            User updateUser = userService.updateLastLogin(user.getUserId());
 
             // ✅ UserResponse 객체 생성 및 반환
             UserResponse userResponse = new UserResponse();
@@ -71,15 +71,16 @@ public class AuthService {
             userResponse.setUserId(user.getUserId());
             userResponse.setUserName(user.getUserName());
             userResponse.setUserRole(user.getUserRole());
+            userResponse.setUserLastLoginDt(updateUser.getUserLastLoginDt());
 
-            logger.info("✅ 로그인 성공: userId={}", userId);
+            //logger.info("✅ 로그인 성공: userId={}", userId);
             return userResponse;
 
         } catch (BadCredentialsException e) {
-            logger.error("❌ 인증 실패: {}", e.getMessage());
+            //logger.error("❌ 인증 실패: {}", e.getMessage());
             throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
         } catch (Exception e) {
-            logger.error("❌ 로그인 중 오류 발생: {}", e.getMessage());
+            //logger.error("❌ 로그인 중 오류 발생: {}", e.getMessage());
             throw new RuntimeException("로그인 중 오류가 발생했습니다.");
         }
     }

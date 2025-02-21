@@ -19,7 +19,7 @@ public class UserService {
         return userMapper.findByUsername(username);
     }
 
-    public void updateLastLogin(String userId) {
-        userMapper.lastLoginDateUpdate(userId);
+    public User updateLastLogin(String userId) {
+        return userMapper.lastLoginDateUpdate(userId);
     }
 }
