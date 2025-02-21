@@ -25,6 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Optional<User> userEntityOptional = userRepository.findByUserId(userId);
 
         if (userEntityOptional.isEmpty()) {
+            //여기
             logger.error("❌ 사용자 조회 실패: userId={} (DB에서 사용자 정보 없음)", userId);
             throw new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + userId);
         }

@@ -45,6 +45,7 @@ public class AuthService {
 
             // ✅ DB에서 사용자 정보 조회
             Optional<User> optionalUser = userRepository.findByUserId(userId);
+            //
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
 
