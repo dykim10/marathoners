@@ -9,7 +9,7 @@ spring:
         password: 1q2w3e4r!!
     sql:
         init:
-            mode: always  # ?? SQL ???? ??
+            mode: always
 
     springdoc:
         api-docs:
@@ -20,6 +20,10 @@ spring:
     logging:
         level:
             root: INFO
-            com.project.marathon.repository: DEBUG  # MyBatis Repository ?? ???
-            org.mybatis: DEBUG                      # MyBatis ?? ?? ???
-            org.apache.ibatis: TRACE                # MyBatis SQL ?? ?? ??
+            com.project.marathon.repository: DEBUG  # MyBatis Repository
+            org.mybatis: DEBUG                      # MyBatis
+            org.apache.ibatis: TRACE                # MyBatis SQL
+    security:
+        user:
+            name: admin  # 기본 로그인 사용자
+            password: admin  # 기본 비밀번호 (테스트 후 반드시 변경!)

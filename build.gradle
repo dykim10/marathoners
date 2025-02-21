@@ -31,6 +31,8 @@ repositories {
 dependencies {
     // Spring Boot 기본 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // MyBatis 연동
