@@ -1,33 +1,31 @@
 package com.project.marathon.security;
-
-import com.project.marathon.entity.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
-    private final User user;
+    private final String userId;
+    private final String password;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(String userId, String password) {
+        this.userId = userId;
+        this.password = password;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getUserRole()));
+        return Collections.emptyList(); // 권한 없음 (필요 시 ROLE 추가)
     }
 
     @Override
     public String getPassword() {
-        return user.getUserPwd();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return userId; // userId를 username으로 사용
     }
 
     @Override
@@ -44,10 +42,9 @@ public class CustomUserDetails implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return user.isEnabled();
-//    }
 
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

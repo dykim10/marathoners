@@ -1,5 +1,7 @@
 package com.project.marathon.config;
 
+import com.project.marathon.repository.UserRepository;
+import com.project.marathon.security.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -26,24 +28,22 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
-    // ✅ AuthenticationManager 등록
+    //사용자 정보 서비스 설정
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return new CustomUserDetailsService(userRepository);
     }
 
-    // ✅ 패스워드 암호화 설정 (BCrypt 사용)
+    //패스워드 암호화 설정 (BCrypt 사용)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //사용자 정보 서비스 설정 (실제 구현 필요)
+    //AuthenticationManager 등록
     @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            throw new UnsupportedOperationException("UserDetailsService를 구현해야 합니다.");
-        };
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     //DaoAuthenticationProvider 등록

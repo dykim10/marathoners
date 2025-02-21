@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
@@ -26,6 +26,8 @@ public class AuthController {
         String password = loginRequest.get("password");
         logger.info("!11111111111111111111111111");
         System.out.println("!23412341234");
+        logger.info("🔹 로그인 요청: userId={}, password=****", userId);
+
         // ✅ 인증 서비스 호출
         UserResponse authResponse = authService.login(userId, password);
 
@@ -35,6 +37,8 @@ public class AuthController {
 
 
         return ResponseEntity.ok(authResponse);
+
+        //return ResponseEntity.ok().body(new UserResponse());
     }
 }
 
