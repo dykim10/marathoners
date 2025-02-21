@@ -5,15 +5,15 @@
 
 <mapper namespace="com.project.marathon.repository.UserRepository">
 
-    <select id="findByUserName" resultType="Users">
+    <select id="findByUserName" resultType="User">
         SELECT * FROM tb_users WHERE user_name = #{userName}
     </select>
 
-    <select id="findByUserId" resultType="Users">
+    <select id="findByUserId" resultType="User">
         SELECT * FROM tb_users WHERE user_id = #{userId}
     </select>
 
-    <insert id="insertUser" parameterType="Users">
+    <insert id="insertUser" parameterType="User">
         INSERT INTO tb_users (username, password, role) VALUES (#{username}, #{password}, #{role})
     </insert>
 

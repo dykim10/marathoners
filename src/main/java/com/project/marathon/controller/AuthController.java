@@ -1,5 +1,7 @@
 package com.project.marathon.controller;
 
+import com.project.marathon.dto.ErrorResponse;
+import com.project.marathon.dto.UserResponse;
 import com.project.marathon.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")  // ✅ "/api" 경로 설정 확인
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -16,17 +18,19 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")  // ✅ "/api/login"이 올바르게 매핑되도록 설정
-    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> loginRequest) {
+    @PostMapping("/login") // ✅ JSON 요청 받도록 설정
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
         String userId = loginRequest.get("userId");
         String password = loginRequest.get("password");
 
-        // ✅ 서비스에서 반환된 데이터를 확인
-        Map<String, String> response = authService.authenticateUser(userId, password);
-        if (response == null) {
-            return ResponseEntity.status(401).body(Map.of("error", "로그인 실패. 아이디 또는 비밀번호를 확인하세요."));
+        // ✅ 인증 서비스 호출
+        UserResponse authResponse = authService.login(userId, password);
+
+        if (authResponse == null) {
+            return ResponseEntity.status(401).body(new ErrorResponse(401, "인증 실패: 아이디 또는 비밀번호가 올바르지 않습니다."));
         }
 
-        return ResponseEntity.ok(response);
+
+        return ResponseEntity.ok(authResponse);
     }
 }

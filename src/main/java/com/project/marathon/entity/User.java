@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data  // Lombok 사용 (Getter/Setter 자동 생성)
-public class Users {
+public class User {
     private UUID userUuid = UUID.randomUUID(); // UUID 기본값 설정
     private String userId;                  // 유저 아이디
     private String userEmail;               // 유저 이메일 주소
@@ -19,4 +19,5 @@ public class Users {
     private String userCi;                  // 유저 CI, DI 키값
     private String userRole;                // 유저 역할
     private String userIdentificationYn;    // 본인인증 여부
+
 }

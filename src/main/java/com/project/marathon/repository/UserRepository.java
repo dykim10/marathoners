@@ -1,6 +1,6 @@
 package com.project.marathon.repository;
 
-import com.project.marathon.entity.Users;
+import com.project.marathon.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,8 +8,11 @@ import java.util.Optional;
 
 @Mapper
 public interface UserRepository {
-    Users findByUserName(@Param("userName") String userName);
-    void insertUser(Users user);
+    Optional<User> findByUsername(@Param("userName") String userName);
+    void insertUser(User user);
 
-    Optional<Users> findByUserId(@Param("userId") String userId);
+    Optional<User> findByUserId(@Param("userId") String userId);
+
+    //마지막로그인시간 업데이트
+    void lastLoginDateUpdate(String userId);
 }

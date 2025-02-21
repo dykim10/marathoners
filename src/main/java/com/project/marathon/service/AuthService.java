@@ -1,62 +1,70 @@
 package com.project.marathon.service;
 
-import com.project.marathon.entity.Users;
+import com.project.marathon.dto.UserResponse;
+import com.project.marathon.dto.UserRequest;
+import com.project.marathon.entity.User;
 import com.project.marathon.repository.UserRepository;
+import com.project.marathon.security.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
-    public AuthService(AuthenticationManager authenticationManager, UserRepository userRepository) {
+    private UserService userService;
+    private UserResponse userResponse;
+
+
+    public AuthService(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
     }
 
-    public Map<String, String> authenticateUser(String userId, String password) {
+    public UserResponse login(String userId, String password) {
         try {
-
-            System.out.println("ASDF1111");
-
-            // ✅ Spring Security에서 인증을 수행
+            // ✅ 사용자 인증 처리
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userId, password)
             );
 
-            System.out.println("222");
-
+            // ✅ 인증 성공 시, SecurityContext에 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            System.out.println("ASDF333");
+            // ✅ JWT 토큰 생성
+            String token = jwtTokenProvider.generateToken(authentication);
 
-            // ✅ 사용자 조회
-            Optional<Users> userOptional = userRepository.findByUserId(userId);
-            if (userOptional.isEmpty()) {
-                throw new RuntimeException("사용자를 찾을 수 없습니다.");
+            // ✅ DB에서 사용자 정보 조회
+            Optional<User> optionalUser = userRepository.findByUserId(userId);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+
+                //마지막 로그인 시간 업데이트
+                userService.updateLastLogin(user.getUserId());
+
+                UserResponse userResponse = new UserResponse();
+                userResponse.setToken(token);
+                userResponse.setUserId(user.getUserId());
+                userResponse.setUserName(user.getUserName());
+                userResponse.setUserRole(user.getUserRole());
+
+                // ✅ 사용자 정보 + JWT 토큰 반환
+                return userResponse;
+
+            } else {
+                return null; // 사용자 정보 없음
             }
-            Users user = userOptional.get();
-
-            // ✅ 응답 데이터 생성 (JWT 발급하는 경우 추가 가능)
-            Map<String, String> response = new HashMap<>();
-            response.put("userId", user.getUserId());
-            response.put("role", user.getUserRole());
-            response.put("message", "로그인 성공");
-
-            return response;
-
         } catch (Exception e) {
-            System.out.println("🚨 로그인 실패: " + e.getMessage());
-            return null;  // 로그인 실패 시 null 반환
+            return null; // 인증 실패
         }
     }
 }

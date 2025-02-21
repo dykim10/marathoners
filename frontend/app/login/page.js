@@ -14,13 +14,13 @@ export default function LoginPage() {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:8080/api/login", {
+            const response = await fetch("/api/login", { // Next.js API Route 사용
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json",  //응답 JSON 허용
+                    "Accept": "application/json",
                 },
-                credentials: "include", //CORS 쿠키 및 세션 유지
+                credentials: "include", // 세션 인증 유지
                 body: JSON.stringify({ userId, password }),
             });
 
@@ -29,8 +29,8 @@ export default function LoginPage() {
             }
 
             const data = await response.json();
-            localStorage.setItem("token", data.token);  // ✅ JWT 토큰 저장
-            router.push("/");  // ✅ 로그인 성공 시 메인 페이지로 이동
+            localStorage.setItem("token", data.token);  // JWT 저장 (필요할 경우)
+            router.push("/");  // 로그인 성공 후 메인 페이지 이동
         } catch (error) {
             setError(error.message);
         }
