@@ -38,7 +38,8 @@ public class AuthService {
     public UserResponse login(String userId, String password) {
         try {
             // ✅ 사용자 정보 조회
-            User user = userMapper.findByUserId(userId);
+            UserResponse user = userMapper.findByUserId(userId);
+            logger.info("user => {}", user);
 
             if (user == null) {
                 logger.error("❌ 인증 실패: 사용자를 찾을 수 없습니다. userId={}", userId);
@@ -77,10 +78,10 @@ public class AuthService {
             return userResponse;
 
         } catch (BadCredentialsException e) {
-            //logger.error("❌ 인증 실패: {}", e.getMessage());
+            logger.error("❌ 인증 실패: {}", e.getMessage());
             throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
         } catch (Exception e) {
-            //logger.error("❌ 로그인 중 오류 발생: {}", e.getMessage());
+            logger.error("❌ 로그인 중 오류 발생: {}", e.getMessage());
             throw new RuntimeException("로그인 중 오류가 발생했습니다.");
         }
     }

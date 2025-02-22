@@ -1,5 +1,6 @@
 package com.project.marathon.service;
 
+import com.project.marathon.dto.UserResponse;
 import com.project.marathon.entity.User;
 import com.project.marathon.mapper.UserMapper;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public Optional<User> getUserByUsername(String username) {
+    public Optional<UserResponse> getUserByUsername(String username) {
         return userMapper.findByUsername(username);
     }
 

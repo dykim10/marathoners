@@ -4,35 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.marathon.mapper.UserMapper">
-
-    <!-- User 엔티티 매핑을 위한 resultMap 정의 -->
-    <resultMap id="UserResultMap" type="com.project.marathon.entity.User">
+    <resultMap id="UserResultMap" type="com.project.marathon.dto.UserResponse">
+<!--        <id property="userUuid" column="user_uuid" jdbcType="VARCHAR"/>&lt;!&ndash; pkey 이기 때문에 &ndash;&gt;-->
         <result property="userId" column="user_id"/>
         <result property="userEmail" column="user_email"/>
         <result property="userName" column="user_name"/>
         <result property="userPassword" column="user_password"/>
         <result property="userHp" column="user_hp"/>
         <result property="userRegDt" column="user_reg_dt"/>
-        <result property="userUnRegDt" column="user_un_reg_dt"/>
-        <result property="userLastLoginDt" column="user_last_login_dt"/>
-        <result property="userStatus" column="user_status"/>
-        <result property="userCi" column="user_ci"/>
-        <result property="userRole" column="user_role"/>
-        <result property="userIdentificationYn" column="user_identification_yn"/>
     </resultMap>
 
     <!-- user_name으로 사용자 조회 -->
-    <select id="findByUserName" parameterType="String" resultMap="UserResultMap">
+    <select id="findByUserName" parameterType="String" resultType="UserResponse">
         SELECT user_id, user_password, user_email, user_role FROM tb_users WHERE user_name = #{userName}
     </select>
 
     <!-- user_id로 사용자 조회 -->
-    <select id="findByUserId" parameterType="String" resultMap="UserResultMap" useCache="false">
+    <select id="findByUserId" parameterType="String" resultMap="UserResultMap">
         SELECT user_id, user_password, user_email, user_role FROM tb_users WHERE user_id = #{userId}
     </select>
 
     <!-- 사용자 삽입 -->
-    <insert id="insertUser" parameterType="com.project.marathon.entity.User">
+    <insert id="insertUser" parameterType="UserRequest">
         INSERT INTO tb_users (user_id, user_password, user_email, user_role)
         VALUES (#{userId}, #{userPassword}, #{userEmail}, #{userRole})
     </insert>

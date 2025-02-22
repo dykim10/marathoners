@@ -1,5 +1,6 @@
 package com.project.marathon.service;
 
+import com.project.marathon.dto.MessageResponse;
 import com.project.marathon.mapper.MessageMapper;
 import com.project.marathon.entity.Message;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class MessageService {
     }
 
     // 모든 메시지 조회
-    public List<Message> getAllMessages() {
+    public List<MessageResponse> getAllMessages() {
         return messageMapper.findAll();
     }
 

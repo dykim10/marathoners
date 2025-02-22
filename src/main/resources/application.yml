@@ -34,9 +34,10 @@ spring:
     # MyBatis 설정
     mybatis:
         mapper-locations: classpath:/mappers/**/*.xml  # 매퍼 XML 파일의 경로
-        type-aliases-package: com.project.marathon.entity  # DTO 클래스 경로
+        type-aliases-package: com.project.marathon.dto  # DTO 클래스 경로
         configuration:
             log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+            map-underscore-to-camel-case: true
 
 decorator:
     datasource:

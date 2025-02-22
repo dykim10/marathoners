@@ -7,6 +7,7 @@
     <!-- 패키지별 타입 별칭 설정 -->
     <typeAliases>
         <package name="com.project.marathon.entity"/>
+        <package name="com.project.marathon.dto"/>
     </typeAliases>
 
     <mappers>

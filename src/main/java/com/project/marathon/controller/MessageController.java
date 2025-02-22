@@ -1,5 +1,6 @@
 package com.project.marathon.controller;
 
+import com.project.marathon.dto.MessageResponse;
 import com.project.marathon.entity.Message;
 import com.project.marathon.service.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,8 +21,8 @@ public class MessageController {
 
     @Operation(summary = "모든 메시지 조회", description = "저장된 모든 메시지를 조회합니다.")
     @GetMapping
-    public ResponseEntity<List<Message>> getMessages() {
-        List<Message> messages = messageService.getAllMessages();
+    public ResponseEntity<List<MessageResponse>> getMessages() {
+        List<MessageResponse> messages = messageService.getAllMessages();
         return ResponseEntity.ok(messages);
     }
 
