@@ -1,7 +1,10 @@
 "use client";
-
+/**
+ *  useState를 사용하면 input 값이 변경될 때 자동으로 React 상태(state)에 저장됩니다.
+ */
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Container, Form, Button, Card, Alert } from "react-bootstrap"; //
 
 export default function LoginPage() {
     const router = useRouter();
@@ -38,44 +41,41 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="login-container">
-            <h1>로그인</h1>
-            {error && <p className="error">{error}</p>}
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    id="userId"
-                    placeholder="아이디"
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    id="userPassword"
-                    placeholder="비밀번호"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">로그인</button>
-            </form>
+        <Container className="d-flex justify-content-center align-items-center vh-100">
+            <Card className="p-4 shadow-sm" style={{ width: "350px" }}>
+                <Card.Body>
+                    <h2 className="text-center mb-4">로그인</h2>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleLogin}>
+                        <Form.Group className="mb-3" controlId="userId">
+                            <Form.Label>아이디</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="아이디 입력"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
 
-            <style jsx>{`
-                .login-container {
-                    text-align: center;
-                    margin-top: 50px;
-                }
-                input {
-                    display: block;
-                    margin: 10px auto;
-                    padding: 10px;
-                    width: 200px;
-                }
-                .error {
-                    color: red;
-                }
-            `}</style>
-        </div>
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>비밀번호</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="비밀번호 입력"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit" className="w-100">
+                            로그인
+                        </Button>
+                    </Form>
+                </Card.Body>
+            </Card>
+        </Container>
+
     );
 }

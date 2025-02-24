@@ -45,78 +45,34 @@ export default function MessagesPage() {
     };
 
     return (
-        <div className="container">
-            <h1>메시지 목록</h1>
+            <div className="container">
+                <h1>메시지 목록</h1>
 
-            {/* 메시지 입력 폼 */}
-            <div className="input-group">
-                <input
-                    type="text"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="새 메시지를 입력하세요"
-                />
-                <button onClick={handleAddMessage}>추가</button>
+                {/* 메시지 입력 폼 */}
+                <div className="input-group">
+                    <input
+                        type="text"
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        placeholder="새 메시지를 입력하세요"
+                    />
+                    <button onClick={handleAddMessage}>추가</button>
+                </div>
+
+                {/* 메시지 목록 */}
+                <ul>
+                    {messages.length > 0 ? (
+                        messages.map((msg) => (
+                            <li key={msg.id}>
+                                <span>{msg.message}</span>
+                                <button onClick={() => handleDeleteMessage(msg.id)}>삭제</button>
+                            </li>
+                        ))
+                    ) : (
+                        <p>메시지가 없습니다.</p>
+                    )}
+                </ul>
+
             </div>
-
-            {/* 메시지 목록 */}
-            <ul>
-                {messages.length > 0 ? (
-                    messages.map((msg) => (
-                        <li key={msg.id}>
-                            <span>{msg.message}</span>
-                            <button onClick={() => handleDeleteMessage(msg.id)}>삭제</button>
-                        </li>
-                    ))
-                ) : (
-                    <p>메시지가 없습니다.</p>
-                )}
-            </ul>
-
-            <style jsx>{`
-                .container {
-                    max-width: 600px;
-                    margin: 50px auto;
-                    padding: 20px;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    text-align: center;
-                }
-                .input-group {
-                    display: flex;
-                    justify-content: center;
-                    margin-bottom: 10px;
-                }
-                input {
-                    flex: 1;
-                    padding: 8px;
-                    margin-right: 5px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                }
-                button {
-                    padding: 8px;
-                    border: none;
-                    background-color: #007bff;
-                    color: white;
-                    cursor: pointer;
-                    border-radius: 4px;
-                }
-                button:hover {
-                    background-color: #0056b3;
-                }
-                ul {
-                    list-style: none;
-                    padding: 0;
-                }
-                li {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px;
-                    border-bottom: 1px solid #ddd;
-                }
-            `}</style>
-        </div>
     );
 }
