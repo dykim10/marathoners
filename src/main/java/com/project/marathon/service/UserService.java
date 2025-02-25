@@ -1,9 +1,11 @@
 package com.project.marathon.service;
 
+import com.project.marathon.dto.UserRequest;
 import com.project.marathon.dto.UserResponse;
 import com.project.marathon.entity.User;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.mapper.UserMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +14,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // ✅ BCrypt 추가
 
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
@@ -39,4 +42,39 @@ public class UserService {
         return response;
     }
 
+    public UserResponse registerUser(UserRequest userRequest) {
+
+        UserResponse response = new UserResponse();
+
+        //중복 검사
+        if (userMapper.countByUserId(userRequest.getUserId()) > 0) {
+            response.setUserExists(UserStatus.USERID_EXISTS);
+            response.setMessage("이미 사용 중인 아이디입니다.");
+            return response;
+        }
+        if (userMapper.countByUserEmail(userRequest.getUserEmail()) > 0) {
+            response.setUserExists(UserStatus.EMAIL_EXISTS);
+            response.setMessage("이미 등록된 이메일입니다.");
+            return response;
+        }
+
+
+        // ✅ 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(userRequest.getUserPassword());
+
+        // ✅ 암호화된 비밀번호로 객체 업데이트
+        userRequest.setUserPassword(encodedPassword);
+
+        //회원가입 처리 (DB에 저장)
+        int result = userMapper.insertUser(userRequest);
+
+        if(result > 0) {
+            response.setUserRegStatus(UserStatus.USER_REGISTER_SUCCESS);
+            response.setMessage("회원가입이 완료되었습니다.");
+        } else {
+            response.setUserRegStatus(UserStatus.USER_REGISTER_FAIL);
+            response.setMessage("회원가입에 실패하였습니다. 다시 시도해주세요..");
+        }
+        return response;
+    }
 }

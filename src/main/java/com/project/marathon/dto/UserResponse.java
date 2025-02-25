@@ -11,5 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("UserResponse") // MyBatis에서 'UserResponse'라는 별칭으로 사용
 public class UserResponse extends User {
     private String token;
-    private UserStatus userExists;
+    private UserStatus userExists;  //아이디, 이메일 중복 검사 확인 변수
+    private UserStatus userRegStatus;   //회원가입 상태 변수
+    private String message;
 }

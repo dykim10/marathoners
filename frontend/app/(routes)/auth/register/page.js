@@ -113,7 +113,7 @@ export default function RegisterPage() {
             }
         } catch (error) {
             console.error("회원가입 오류:", error);
-            setValidationErrors({ form: "⚠ 서버 오류가 발생했습니다." });
+            setValidationErrors({ form: "서버 오류가 발생했습니다." });
         }
     };
 

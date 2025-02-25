@@ -2,6 +2,7 @@ export async function GET(request) {
     try {
         const cookieHeader = request.headers.get("cookie");
         console.log("세션 확인 요청 - 현재 쿠키:", cookieHeader);
+        console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/session`, {
             method: "GET",

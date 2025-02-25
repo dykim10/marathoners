@@ -11,7 +11,7 @@ import java.util.Optional;
 @Mapper
 public interface UserMapper {
     Optional<UserResponse> findByUsername(@Param("userName") String userName);
-    void insertUser(UserRequest user);
+    int insertUser(UserRequest user);  //성공하면 1, 실패하면 0 반환
 
     @org.apache.ibatis.annotations.ResultType(com.project.marathon.dto.UserResponse.class) // 패키지 경로 명확하게 지정
     UserResponse findByUserId(@Param("userId") String userId);
