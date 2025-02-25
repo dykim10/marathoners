@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         UserResponse user = userMapper.findByUserId(userId);
         if (user == null) {
-            logger.error("❌ 인증 실패: 사용자를 찾을 수 없습니다1111. userId={}", userId);
+            logger.error("인증 실패: 사용자를 찾을 수 없습니다1111. userId={}", userId);
             throw new RuntimeException("인증 실패: 아이디 또는 비밀번호가 올바르지 않습니다.");
         }
 

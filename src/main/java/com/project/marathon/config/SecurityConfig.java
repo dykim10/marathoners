@@ -70,9 +70,10 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "https://port-next-frontend-m7cqh44n99825c47.sel4.cloudtype.app"
         ));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true); // ✅ 쿠키 허용
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Set-Cookie")); // ✅ `Set-Cookie` 헤더를 클라이언트에서 확인 가능하도록 추가
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -80,19 +81,26 @@ public class SecurityConfig {
     }
 
     //Spring Security 설정
+
+    /*
+    스프링 시큐리티 세션 활성화 내용
+        * JWT 사용 시 → SessionCreationPolicy.STATELESS
+        * 세션 사용 시 → SessionCreationPolicy.IF_REQUIRED 또는 ALWAYS
+        * 대규모 서비스 (부하 분산 필요 시) → Redis 세션 저장 (spring-session-data-redis 활용)
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(withDefaults()) // CORS 설정 적용
                 .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT 사용 시 필요
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)) // ✅ 세션을 필요할 때만 유지
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/public/**").permitAll() // 로그인 API 인증 없이 허용
+                        .requestMatchers("/api/login", "/api/logout", "/api/session").permitAll() // ✅ 로그인, 로그아웃, 세션 확인 API 허용
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            logger.error("🚨 403 Forbidden 발생! 요청 URL: {}", request.getRequestURI());
+                            logger.error("securityFilterChain : 403 Forbidden 발생! 요청 URL: {}", request.getRequestURI());
                             response.sendError(403, "접근이 거부되었습니다.");
                         })
                 );

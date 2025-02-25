@@ -10,14 +10,42 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        setIsLoggedIn(!!token);
+        // 🔹 백엔드 세션 확인 (Spring Boot API 호출)
+        const checkSession = async () => {
+            try {
+                const response = await fetch("/api/session", {
+                    method: "GET",
+                    credentials: "include", // 세션 쿠키 포함
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setIsLoggedIn(true);
+                    //setUserName(data.userName); // 유저 이름 표시 가능
+                } else {
+                    setIsLoggedIn(false);
+                }
+            } catch (error) {
+                console.error("세션 확인 오류:", error);
+                setIsLoggedIn(false);
+            }
+        };
+
+        checkSession();
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        setIsLoggedIn(false);
-        router.push("/login");
+    const handleLogout = async () => {
+        try {
+            await fetch("/api/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+
+            setIsLoggedIn(false);
+            router.push("/login");
+        } catch (error) {
+            console.error("로그아웃 실패:", error);
+        }
     };
 
     return (
