@@ -19,9 +19,9 @@ export default function RootLayout({ children }) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
         </head>
         <body>
-            <Header />  {/* ✅ 헤더 추가 */}
+            <Header />  {/*헤더 추가 */}
             <main>{children}</main>
-            <Footer />  {/* ✅ 푸터 추가 */}
+            <Footer />  {/*푸터 추가 */}
         </body>
         </html>
     );

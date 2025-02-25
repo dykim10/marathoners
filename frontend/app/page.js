@@ -53,7 +53,7 @@ export default function Home() {
             console.log("🔹 로그아웃 후 세션 상태 확인:", sessionExists);
 
             if (!sessionExists) {
-                router.push("/login"); // 로그인 페이지로 이동
+                router.push("/auth/login"); // 로그인 페이지로 이동
             }
 
         } catch (error) {
@@ -74,7 +74,7 @@ export default function Home() {
                                 <Button variant="danger" onClick={handleLogout}>로그아웃</Button>
                             </>
                         ) : (
-                            <Button variant="primary" onClick={() => router.push('/login')}>로그인</Button>
+                            <Button variant="primary" onClick={() => router.push('/auth/login')}>로그인</Button>
                         )}
                     </div>
                 </Col>
