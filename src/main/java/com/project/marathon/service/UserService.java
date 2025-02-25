@@ -1,18 +1,22 @@
 package com.project.marathon.service;
 
+import com.project.marathon.controller.UserController;
 import com.project.marathon.dto.UserRequest;
 import com.project.marathon.dto.UserResponse;
 import com.project.marathon.entity.User;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
-
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // ✅ BCrypt 추가
 
@@ -58,11 +62,13 @@ public class UserService {
             return response;
         }
 
+        if (userRequest.getUserUuid() == null) {
+            logger.info("? => {}" ,userRequest.getUserUuid());
+            userRequest.setUserUuid(UUID.randomUUID()); //UUID 자동 생성
+        }
 
-        // ✅ 비밀번호 암호화
+        //비밀번호 암호화 & 암호화된 비밀번호로 객체 업데이트
         String encodedPassword = passwordEncoder.encode(userRequest.getUserPassword());
-
-        // ✅ 암호화된 비밀번호로 객체 업데이트
         userRequest.setUserPassword(encodedPassword);
 
         //회원가입 처리 (DB에 저장)

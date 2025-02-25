@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/check-user")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/check-user")
     public ResponseEntity<UserResponse> checkUser(@RequestBody Map<String, String> request) {
         String type = request.get("type");
         String value = request.get("value");
@@ -33,6 +33,9 @@ public class UserController {
     // ✅ 회원가입 API
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userRequest) {
+
+        logger.info("userRequest => {}", userRequest);
+
         UserResponse response = userService.registerUser(userRequest);
         if (response.getUserRegStatus() == UserStatus.USER_REGISTER_SUCCESS) {
             return ResponseEntity.ok(response); // ✅ 성공 시 200 OK 반환

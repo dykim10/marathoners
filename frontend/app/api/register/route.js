@@ -4,7 +4,7 @@ export async function POST(request) {
         const formData = await request.json();
         const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot 서버 주소
 
-        // console.log("회원가입 요청 데이터:", formData);
+        console.log("회원가입 요청 데이터:", formData);
         // return;
 
         // ✅ 백엔드 UserController (`/api/register`)로 요청 전달

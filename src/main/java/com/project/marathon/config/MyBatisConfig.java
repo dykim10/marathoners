@@ -31,7 +31,6 @@ public class MyBatisConfig {
         TypeHandlerRegistry typeHandlerRegistry = sqlSessionFactory.getConfiguration().getTypeHandlerRegistry();
         typeHandlerRegistry.register(UUID.class, new UUIDTypeHandler());
 
-
         return factoryBean.getObject();
     }
 

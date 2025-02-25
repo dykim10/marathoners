@@ -26,8 +26,9 @@
 
     <!-- 사용자 삽입 -->
     <insert id="insertUser" parameterType="UserRequest" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO tb_users (user_id, user_password, user_email, user_role)
-        VALUES (#{userId}, #{userPassword}, #{userEmail}, COALESCE(#{userRole}, 'USER'))
+        INSERT INTO tb_users (user_uuid, user_id, user_password, user_email, user_role)
+        VALUES (#{userUuid, typeHandler=com.project.marathon.config.UUIDTypeHandler}
+               , #{userId}, #{userPassword}, #{userEmail}, COALESCE(#{userRole}, 'USER'))
     </insert>
 
     <select id="lastLoginDateUpdate" parameterType="String" resultMap="UserResultMap">
