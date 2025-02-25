@@ -36,4 +36,14 @@
         WHERE user_id = #{userId}
         RETURNING *;
     </select>
+
+    <!-- 아이디 중복 확인 -->
+    <select id="countByUserId" resultType="int">
+        SELECT COUNT(*) FROM tb_users WHERE user_id = #{userId}
+    </select>
+
+    <!-- 이메일 중복 확인 -->
+    <select id="countByUserEmail" resultType="int">
+        SELECT COUNT(*) FROM tb_users WHERE user_email = #{userEmail}
+    </select>
 </mapper>

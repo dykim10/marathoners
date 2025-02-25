@@ -33,7 +33,7 @@ export async function GET(request) {
         });
 
     } catch (error) {
-        console.error("❌ Next.js API Route 내부 오류:", error);
+        console.error("Next.js API Route 내부 오류:", error);
         return new Response(JSON.stringify({ error: "서버 오류 발생" }), { status: 500 });
     }
 }

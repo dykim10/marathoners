@@ -18,4 +18,7 @@ public interface UserMapper {
 
     //마지막로그인시간 업데이트
     User lastLoginDateUpdate(String userId);
+
+    int countByUserId(@Param("userId") String userId);
+    int countByUserEmail(@Param("userEmail") String userEmail);
 }

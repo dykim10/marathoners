@@ -95,8 +95,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)) // ✅ 세션을 필요할 때만 유지
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/logout", "/api/session").permitAll() // ✅ 로그인, 로그아웃, 세션 확인 API 허용
-                        .anyRequest().authenticated()
+                    .requestMatchers("/api/**").permitAll() //api 주소 호출은 오픈
+                    .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler((request, response, accessDeniedException) -> {

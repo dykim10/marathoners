@@ -1,9 +1,7 @@
 export async function POST(req) {
     try {
         const { userId, password } = await req.json();
-        console.log("Next.js API Route에서 Spring Boot 요청 시도:", { userId, password });
         const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot 서버 URL
-        console.log("API_URL => " + API_URL);
         const response = await fetch(`${API_URL}/api/login`, {
             method: "POST",
             headers: {
