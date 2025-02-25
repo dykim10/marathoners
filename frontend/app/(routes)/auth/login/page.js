@@ -1,11 +1,9 @@
 "use client";
-/**
- *  useState를 사용하면 input 값이 변경될 때 자동으로 React 상태(state)에 저장됩니다.
- */
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Container, Form, Button, Card, Alert } from "react-bootstrap";
-import {checkSession} from "@/utils/session"; //
+import { checkSession } from "@/utils/session"; //
 
 export default function LoginPage() {
     const router = useRouter();
@@ -18,7 +16,7 @@ export default function LoginPage() {
         const verifySession = async () => {
             if (await checkSession()) {
                 setIsLoggedIn(true);
-                router.push("/"); //이미 로그인된 경우 홈으로 리디렉트
+                router.push("/"); // 이미 로그인된 경우 홈으로 리디렉트
             } else {
                 setIsLoggedIn(false);
             }
@@ -27,13 +25,11 @@ export default function LoginPage() {
         verifySession();
     }, []);
 
-
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
 
         try {
-            // Next.js API Route 호출 (Spring Boot API가 아니라!)
             const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
@@ -47,10 +43,6 @@ export default function LoginPage() {
             if (!response.ok) {
                 throw new Error("로그인 실패. 아이디와 비밀번호를 확인하세요.");
             }
-
-            const data = await response.json();
-            // console.log("로그인 요청 후 JSESSIONID 확인:", document.cookie);
-            // console.log("data ==> ", data);
 
             checkSession(); // 로그인 후 세션 체크 실행
 
@@ -89,13 +81,24 @@ export default function LoginPage() {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="w-100">
-                            로그인
-                        </Button>
+                        {/* ✅ 버튼을 가로로 정렬 */}
+                        <div className="d-flex justify-content-between">
+                            <Button variant="primary" type="submit" className="w-50 me-2">
+                                로그인
+                            </Button>
+
+                            <Button
+                                variant="secondary"
+                                type="button"
+                                className="w-50"
+                                onClick={() => router.push("/auth/register")}
+                            >
+                                회원가입
+                            </Button>
+                        </div>
                     </Form>
                 </Card.Body>
             </Card>
         </Container>
-
     );
 }
