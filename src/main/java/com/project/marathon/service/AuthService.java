@@ -111,8 +111,8 @@ public class AuthService {
         HttpSession session = request.getSession(false);
         if (session == null) {
             logger.info("세션 없음 - 요청된 JSESSIONID: {}", request.getRequestedSessionId());
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음 authService"));
-            return ResponseEntity.ok(Map.of("message", "로그인되지 않은 상태"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음"));
+            //return ResponseEntity.ok(Map.of("message", "로그인되지 않은 상태"));
 
         }
 
@@ -124,16 +124,16 @@ public class AuthService {
         Object securityContext = session.getAttribute("SPRING_SECURITY_CONTEXT");
         if (securityContext == null) {
             logger.info("SPRING_SECURITY_CONTEXT 없음 - JSESSIONID: {}", session.getId());
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음 (SPRING_SECURITY_CONTEXT 없음)"));
-            return ResponseEntity.ok(Map.of("message", "SPRING_SECURITY_CONTEXT"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음 (SPRING_SECURITY_CONTEXT 없음)"));
+            //return ResponseEntity.ok(Map.of("message", "SPRING_SECURITY_CONTEXT"));
         }
 
         //`SecurityContextHolder`에서 인증 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
             logger.info("인증되지 않음 - JSESSIONID: {}", session.getId());
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "인증되지 않은 사용자"));
-            return ResponseEntity.ok(Map.of("message", "인증되지 않은 사용자"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "인증되지 않은 사용자"));
+            //return ResponseEntity.ok(Map.of("message", "인증되지 않은 사용자"));
         }
 
         String userName = authentication.getName();

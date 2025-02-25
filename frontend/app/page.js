@@ -14,7 +14,7 @@ export default function Home() {
         //백엔드 세션 확인 (Spring Boot API 호출)
         const verifySession = async () => {
             const sessionExists = await checkSession(); //공통 함수 호출
-
+            console.log("? => " + sessionExists);
             if (sessionExists) {
                 setIsLoggedIn(true);
                 console.log("세션 확인 완료, 비즈니스 로직 실행 가능");
@@ -40,18 +40,21 @@ export default function Home() {
                 credentials: "include",
             });
 
-
             console.log("로그아웃 요청 응답 상태:", response.status);
 
             if (!response.ok) {
                 throw new Error("로그아웃 실패");
             }
 
-            //클라이언트에서 `JSESSIONID` 삭제 (추가)
-            document.cookie = "JSESSIONID=; Path=/; Max-Age=0; Secure";
+            // ✅ 로그아웃 후 `checkSession()` 실행하여 상태 업데이트
+            const sessionExists = await checkSession();
+            setIsLoggedIn(sessionExists);
 
-            setIsLoggedIn(false);
-            router.push("/login");
+            console.log("🔹 로그아웃 후 세션 상태 확인:", sessionExists);
+
+            if (!sessionExists) {
+                router.push("/login"); // 로그인 페이지로 이동
+            }
 
         } catch (error) {
             console.error("로그아웃 실패:", error);
