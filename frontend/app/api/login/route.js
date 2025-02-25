@@ -1,7 +1,7 @@
 export async function POST(req) {
     try {
         const { userId, password } = await req.json();
-        console.log("🔹 Next.js API Route에서 Spring Boot 요청 시도:", { userId, password });
+        console.log("Next.js API Route에서 Spring Boot 요청 시도:", { userId, password });
         const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot 서버 URL
         console.log("API_URL => " + API_URL);
         const response = await fetch(`${API_URL}/api/login`, {
@@ -14,7 +14,7 @@ export async function POST(req) {
             body: JSON.stringify({ userId, password }),
         });
 
-        console.log("🔹 Spring Boot 응답 상태 코드:", response.status);
+        console.log("Spring Boot 응답 상태 코드:", response.status);
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -24,7 +24,7 @@ export async function POST(req) {
 
         // ✅ 백엔드에서 받은 `Set-Cookie` 헤더 처리
         const setCookie = response.headers.get("Set-Cookie"); // 다중 쿠키 지원이 안 될 수도 있음
-        console.log("🔹 백엔드에서 받은 Set-Cookie:", setCookie);
+        console.log("백엔드에서 받은 Set-Cookie:", setCookie);
 
         // 백엔드에서 반환된 데이터를 JSON으로 변환
         const data = await response.json();

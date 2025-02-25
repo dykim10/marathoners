@@ -4,45 +4,55 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import {checkSession} from "@/utils/session";
 
 export default function Home() {
     const router = useRouter();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // 🔹 백엔드 세션 확인 (Spring Boot API 호출)
-        const checkSession = async () => {
-            try {
-                const response = await fetch("/api/session", {
-                    method: "GET",
-                    credentials: "include", // 세션 쿠키 포함
-                });
+        //백엔드 세션 확인 (Spring Boot API 호출)
+        const verifySession = async () => {
+            const sessionExists = await checkSession(); //공통 함수 호출
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setIsLoggedIn(true);
-                    //setUserName(data.userName); // 유저 이름 표시 가능
-                } else {
-                    setIsLoggedIn(false);
-                }
-            } catch (error) {
-                console.error("세션 확인 오류:", error);
+            if (sessionExists) {
+                setIsLoggedIn(true);
+                console.log("세션 확인 완료, 비즈니스 로직 실행 가능");
+                //TO-DO 비지니스 로직 실행 진행. 여기서 추가 개발 과정에서 참고 해야 할 코드
+
+
+            } else {
                 setIsLoggedIn(false);
+                console.log("세션 없음, 로그인 필요");
             }
         };
 
-        checkSession();
+        verifySession();
     }, []);
 
+    console.log(">> " + isLoggedIn);
     const handleLogout = async () => {
         try {
-            await fetch("/api/logout", {
+            console.log("로그아웃 요청 시작: /api/logout");
+
+            const response = await fetch("/api/logout", {
                 method: "POST",
                 credentials: "include",
             });
 
+
+            console.log("로그아웃 요청 응답 상태:", response.status);
+
+            if (!response.ok) {
+                throw new Error("로그아웃 실패");
+            }
+
+            //클라이언트에서 `JSESSIONID` 삭제 (추가)
+            document.cookie = "JSESSIONID=; Path=/; Max-Age=0; Secure";
+
             setIsLoggedIn(false);
             router.push("/login");
+
         } catch (error) {
             console.error("로그아웃 실패:", error);
         }

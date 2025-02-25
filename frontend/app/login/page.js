@@ -4,7 +4,8 @@
  */
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Container, Form, Button, Card, Alert } from "react-bootstrap"; //
+import { Container, Form, Button, Card, Alert } from "react-bootstrap";
+import {checkSession} from "@/utils/session"; //
 
 export default function LoginPage() {
     const router = useRouter();
@@ -13,34 +14,19 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // ✅ 세션 확인 함수 추가
-    const checkSession = async () => {
-        try {
-            const response = await fetch("/api/session", {
-                method: "GET",
-                credentials: "include", // 🔹 쿠키 포함 요청
-            });
-
-            console.log("🔹 `/api/session` 요청 헤더:", response.headers);
-            console.log("🔹 `/api/session` 응답 상태:", response.status);
-
-            if (!response.ok) {
-                throw new Error("세션 없음::login/page.js");
-            }
-
-            const data = await response.json();
-            console.log("✅ 세션 유지됨, 서버 응답:", data);
-            setIsLoggedIn(true); // ✅ 로그인 상태 업데이트
-        } catch (error) {
-            console.log("❌ 세션 확인 실패 123 => ", error);
-            setIsLoggedIn(false);
-        }
-    };
-
-    // ✅ 페이지 로드 시 세션 확인
     useEffect(() => {
-        checkSession();
+        const verifySession = async () => {
+            if (await checkSession()) {
+                setIsLoggedIn(true);
+                router.push("/"); //이미 로그인된 경우 홈으로 리디렉트
+            } else {
+                setIsLoggedIn(false);
+            }
+        };
+
+        verifySession();
     }, []);
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -63,10 +49,10 @@ export default function LoginPage() {
             }
 
             const data = await response.json();
-            console.log("🔹 로그인 요청 후 JSESSIONID 확인:", document.cookie);
-            console.log("data ==> ", data);
+            // console.log("로그인 요청 후 JSESSIONID 확인:", document.cookie);
+            // console.log("data ==> ", data);
 
-            checkSession(); // ✅ 로그인 후 세션 체크 실행
+            checkSession(); // 로그인 후 세션 체크 실행
 
             router.push("/");
         } catch (error) {
