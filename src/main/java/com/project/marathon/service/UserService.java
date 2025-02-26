@@ -83,4 +83,12 @@ public class UserService {
         }
         return response;
     }
+
+    public UserResponse getUserById(String userId){
+
+        //회원정보
+        UserResponse response = userMapper.findByUserId(userId);
+        return response;
+    }
+
 }

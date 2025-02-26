@@ -85,9 +85,11 @@ export async function DELETE(request) {
 export async function GET(request) {
     try {
         const { searchParams } = new URL(request.url);
-        const userId = searchParams.get("userId");
+
+        const userId = searchParams.get("userId");  //searchParams에 userId를 넣으면 타인, 안넣으면 본인.
         const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+        const cookieHeader = request.headers.get("cookie");
         let apiEndpoint = `${API_URL}/api/me`; // 기본적으로 로그인한 사용자 정보 조회
 
         if (userId) {
@@ -97,7 +99,11 @@ export async function GET(request) {
         //백엔드 UserController로 요청 전달
         const response = await fetch(apiEndpoint, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieHeader || "",
+            },
+            credentials: "include",  // ✅ 인증 정보를 포함 (세션/쿠키 유지)
         });
 
         if (!response.ok) {
@@ -111,4 +117,5 @@ export async function GET(request) {
         console.error("회원정보 조회 오류:", error);
         return new Response(JSON.stringify({ error: "회원정보 조회 중 서버 오류 발생" }), { status: 500 });
     }
+
 }

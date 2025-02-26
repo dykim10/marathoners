@@ -30,17 +30,17 @@ export default function Home() {
         verifySession();
     }, []);
 
-    console.log(">> " + isLoggedIn);
+    //console.log(">> " + isLoggedIn);
     const handleLogout = async () => {
         try {
-            console.log("로그아웃 요청 시작: /api/logout");
+            //console.log("로그아웃 요청 시작: /api/logout");
 
             const response = await fetch("/api/logout", {
                 method: "POST",
                 credentials: "include",
             });
 
-            console.log("로그아웃 요청 응답 상태:", response.status);
+            //console.log("로그아웃 요청 응답 상태:", response.status);
 
             if (!response.ok) {
                 throw new Error("로그아웃 실패");
@@ -50,7 +50,7 @@ export default function Home() {
             const sessionExists = await checkSession();
             setIsLoggedIn(sessionExists);
 
-            console.log("🔹 로그아웃 후 세션 상태 확인:", sessionExists);
+            //console.log("로그아웃 후 세션 상태 확인:", sessionExists);
 
             if (!sessionExists) {
                 router.push("/auth/login"); // 로그인 페이지로 이동
@@ -59,6 +59,10 @@ export default function Home() {
         } catch (error) {
             console.error("로그아웃 실패:", error);
         }
+    };
+
+    const handleMyInfo = () => {
+        router.push("/user/me"); //클릭 시 `/user/me` 페이지로 이동
     };
 
     return (
@@ -70,8 +74,11 @@ export default function Home() {
                         <p className="text-muted">주요기술 : Next.Js, Spring-Boot, PostgreSql</p>
                         {isLoggedIn ? (
                             <>
-                                <p className="text-success">로그인 상태입니다.</p>
-                                <Button variant="danger" onClick={handleLogout}>로그아웃</Button>
+                                <div>
+                                    <p className="text-success">로그인 상태입니다.</p>
+                                    <Button className="btn btn-danger btn-sm me-2" variant="danger" onClick={handleLogout}>로그아웃</Button>
+                                    <Button className="btn btn-warning btn-sm" variant="warning" onClick={handleMyInfo}>내 정보 보기</Button>
+                                </div>
                             </>
                         ) : (
                             <Button variant="primary" onClick={() => router.push('/auth/login')}>로그인</Button>

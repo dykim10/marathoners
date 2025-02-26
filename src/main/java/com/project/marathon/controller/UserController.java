@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -43,4 +45,20 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response); // ✅ 실패 시 500 반환
         }
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            throw new RuntimeException("사용자가 로그인되어 있지 않습니다.");
+        }
+
+        // 현재 로그인된 사용자 아이디 가져오기
+        String userId = userDetails.getUsername();
+        UserResponse response = userService.getUserById(userId);
+
+        // DB에서 사용자 정보 조회
+        return ResponseEntity.ok(response);
+
+    }
+
 }
