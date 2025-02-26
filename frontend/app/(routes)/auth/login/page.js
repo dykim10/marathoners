@@ -91,7 +91,7 @@ export default function LoginPage() {
                                 variant="secondary"
                                 type="button"
                                 className="w-50"
-                                onClick={() => router.push("/auth/register")}
+                                onClick={() => router.push("/user/register")}
                             >
                                 회원가입
                             </Button>
