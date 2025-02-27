@@ -6,6 +6,8 @@ import com.project.marathon.dto.UserResponse;
 import com.project.marathon.entity.User;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.mapper.UserMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,11 +20,14 @@ import java.util.UUID;
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserMapper userMapper;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // ✅ BCrypt 추가
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //BCrypt 추가
+    private final AuthService authService; //AuthService 추가
 
-    public UserService(UserMapper userMapper) {
+    public UserService(UserMapper userMapper, AuthService authService) {
         this.userMapper = userMapper;
+        this.authService = authService;
     }
+
 
     public Optional<UserResponse> getUserByUsername(String username) {
         return userMapper.findByUsername(username);
@@ -111,11 +116,9 @@ public class UserService {
             String encodedPassword = passwordEncoder.encode(userRequest.getUserPassword());
             userRequest.setUserPassword(encodedPassword);
         }
-        logger.info("mapper ::: userRequest => {}", userRequest);
 
         //회원정보 처리 (DB에 저장)
         int result = userMapper.modifyUser(userRequest);
-        logger.info("result ::: userRequest => {}", userRequest);
         if(result > 0) {
             response.setUserRegStatus(UserStatus.USER_REGISTER_SUCCESS);
             response.setMessage("회원가입이 완료되었습니다.");
@@ -126,4 +129,22 @@ public class UserService {
         return response;
     }
 
+    public UserResponse deleteUser(String userUuid, HttpServletRequest request, HttpServletResponse response) {
+        UserResponse userResponse  = new UserResponse();
+
+        //회원정보 처리 (DB에 저장)
+        int result = userMapper.deleteUser(userUuid);
+
+        if(result > 0) {
+            userResponse.setUserRegStatus(UserStatus.USER_REGISTER_SUCCESS);
+            userResponse.setMessage("회원탈퇴 처리가 완료되었습니다.");
+            
+            //세션 및 쿠키 제거
+            authService.logout(request, response);
+        } else {
+            userResponse.setUserRegStatus(UserStatus.USER_REGISTER_FAIL);
+            userResponse.setMessage("회원탈퇴 처리에 실패하였습니다. 다시 시도해주세요..");
+        }
+        return userResponse;
+    }
 }

@@ -61,11 +61,15 @@ export async function DELETE(request) {
     try {
         const formData = await request.json();
         const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const cookieHeader = request.headers.get("cookie"); // 현재 쿠키 가져오기
 
         //백엔드 UserController (`/api/delete`)로 요청 전달
         const response = await fetch(`${API_URL}/api/delete`, {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                Cookie: cookieHeader || "", // 백엔드로 쿠키 전달
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(formData),
         });
 

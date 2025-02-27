@@ -4,6 +4,8 @@ import com.project.marathon.dto.UserRequest;
 import com.project.marathon.dto.UserResponse;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,5 +75,20 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response); // 실패 시 500 반환
         }
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestBody UserRequest userRequest, HttpServletRequest request, HttpServletResponse response){
+
+        logger.info("controller ::: userRequest => {}", userRequest);
+
+        String userUuid = String.valueOf(userRequest.getUserUuid());
+        UserResponse userResponse = userService.deleteUser(userUuid, request, response);
+        if (userResponse.getUserRegStatus() == UserStatus.USER_REGISTER_SUCCESS) {
+            return ResponseEntity.ok(userResponse); // 성공 시 200 OK 반환
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(userResponse); // 실패 시 500 반환
+        }
+    }
+
 }
 

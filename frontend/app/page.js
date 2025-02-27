@@ -92,8 +92,8 @@ export default function Home() {
             <Container className="mt-5">
                 <Row className="g-4">
                     {[
-                        { title: "Feature 1", text: "Describe the feature in detail." },
-                        { title: "Feature 2", text: "Highlight another great feature." },
+                        { title: "대회 정보", text: "대회 정보 게시판 연결" },
+                        { title: "회원 정보", text: "회원 정보 게시판 연결" },
                         { title: "Feature 3", text: "Explain the third feature concisely." }
                     ].map((feature, index) => (
                         <Col md={4} key={index}>

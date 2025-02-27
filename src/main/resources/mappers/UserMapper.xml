@@ -16,14 +16,18 @@
 
     <!-- user_name으로 사용자 조회 -->
     <select id="findByUserName" parameterType="String" resultType="UserResponse">
-        SELECT user_uuid, user_id, user_password, user_email, user_role FROM tb_users WHERE user_name = #{userName}
+        SELECT user_uuid, user_id, user_password, user_email, user_role
+        FROM tb_users
+        WHERE user_name = #{userName}
     </select>
 
     <!-- user_id로 사용자 조회 -->
     <select id="findByUserId" parameterType="String" resultMap="UserResultMap">
         SELECT user_uuid, user_id, user_password, user_email, user_name
              , user_role, user_reg_dt
-        FROM tb_users WHERE user_id = #{userId}
+        FROM tb_users
+        WHERE user_id = #{userId}
+        AND user_status = 'Y'
     </select>
 
     <!-- 사용자 삽입 -->
@@ -61,6 +65,15 @@
             <if test="userPassword != null and userPassword != ''">
                 , user_password = #{userPassword}
             </if>
+        </set>
+        where user_uuid = #{userUuid};
+    </update>
+
+    <update id="deleteUser" parameterType="String">
+        update tb_users
+        <set>
+            user_status = 'N',
+            user_un_reg_dt = now()
         </set>
         where user_uuid = #{userUuid};
     </update>
