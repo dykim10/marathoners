@@ -4,14 +4,14 @@
   "settings": {
     "width": 3000,
     "height": 3000,
-    "scrollTop": 0,
-    "scrollLeft": -651,
-    "zoomLevel": 1,
+    "scrollTop": -375,
+    "scrollLeft": -462,
+    "zoomLevel": 0.82,
     "show": 431,
     "database": 16,
     "databaseName": "marathon",
-    "canvasType": "@dineug/erd-editor/builtin-generator-code",
-    "language": 1,
+    "canvasType": "ERD",
+    "language": 4,
     "tableNameCase": 4,
     "columnNameCase": 2,
     "bracketType": 1,
@@ -42,7 +42,9 @@
       "VLlbT2xb-1cSdnPZO_BTp",
       "NJFKByHvg8bPyPAUYQlM-"
     ],
-    "relationshipIds": [],
+    "relationshipIds": [
+      "Z87qrY8FVfFDaylcFcURz"
+    ],
     "indexIds": [
       "f0ise-hT8vgIJeOL45JEF",
       "ZlWDW_1k3O2ix21lw261I",
@@ -90,21 +92,21 @@
           "aMJHdDB_usKZVVNWd2lqX"
         ],
         "ui": {
-          "x": 889.8282,
-          "y": 3.0429,
+          "x": 174.1798,
+          "y": 245.8771,
           "zIndex": 2,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FF8B8B"
         },
         "meta": {
-          "updateAt": 1740100222563,
+          "updateAt": 1740631122300,
           "createAt": 1739320410914
         }
       },
       "m1mHlBQZtFx0ov-YRFdAO": {
         "id": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "tb_marathon_events",
+        "name": "tb_marathon_race",
         "comment": "마라톤 대회정보",
         "columnIds": [
           "r0a6GtI10liI7NmuLVZHN",
@@ -113,11 +115,11 @@
           "VGxDmHv2BTDjH1nNgy8Ks",
           "Il8kWO0bF8REZey8CDT4u",
           "gj602dUOR7gYSLfa1K6aC",
-          "3xj0STrkVRRGWJPz4Seb4",
-          "dsIo8720NQbBnPe5NlzM_",
           "Qew4hLq1yyb61izdRSEWQ",
+          "dsIo8720NQbBnPe5NlzM_",
           "raZECWGjSebfT5PFiGjff",
-          "xla5kZ_ekR2iduSOPIP8L"
+          "xla5kZ_ekR2iduSOPIP8L",
+          "-7KmpxLtgrFXeZra2MErx"
         ],
         "seqColumnIds": [
           "r0a6GtI10liI7NmuLVZHN",
@@ -127,21 +129,25 @@
           "Il8kWO0bF8REZey8CDT4u",
           "gj602dUOR7gYSLfa1K6aC",
           "3xj0STrkVRRGWJPz4Seb4",
-          "dsIo8720NQbBnPe5NlzM_",
           "Qew4hLq1yyb61izdRSEWQ",
+          "dsIo8720NQbBnPe5NlzM_",
           "raZECWGjSebfT5PFiGjff",
-          "xla5kZ_ekR2iduSOPIP8L"
+          "xla5kZ_ekR2iduSOPIP8L",
+          "-7KmpxLtgrFXeZra2MErx",
+          "3PG1XusdetHlYvtlg5OBF",
+          "GJbqDBtfHAb-7_XZW_5A3",
+          "o4pRaiyEg_i72929Yp8ne"
         ],
         "ui": {
-          "x": 4.3275,
-          "y": 378.1146,
+          "x": 1835.4199,
+          "y": 26.6937,
           "zIndex": 41,
-          "widthName": 109,
+          "widthName": 97,
           "widthComment": 89,
           "color": "#3300FF"
         },
         "meta": {
-          "updateAt": 1739840225591,
+          "updateAt": 1740638587030,
           "createAt": 1739320543034
         }
       },
@@ -182,15 +188,15 @@
           "uo1lx3BE_Cbl4e61GU6BJ"
         ],
         "ui": {
-          "x": 7.8446,
-          "y": 794.0571,
+          "x": 1232.1778669542089,
+          "y": 1786.914557560771,
           "zIndex": 60,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1739927251197,
+          "updateAt": 1740631053872,
           "createAt": 1739320590834
         }
       },
@@ -217,15 +223,15 @@
           "O14rkHDZR0a86aceWcC2c"
         ],
         "ui": {
-          "x": 605.629,
-          "y": 1358.4864,
+          "x": 989.9385,
+          "y": 705.8625,
           "zIndex": 96,
           "widthName": 72,
           "widthComment": 74,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1739778159669,
+          "updateAt": 1740631104089,
           "createAt": 1739320773401
         }
       },
@@ -250,42 +256,50 @@
           "spGpVfU5TmqN4m05LYvlA"
         ],
         "ui": {
-          "x": 604.3957,
-          "y": 793.5426,
+          "x": 1866.570595995004,
+          "y": 1856.7828289850938,
           "zIndex": 128,
           "widthName": 97,
           "widthComment": 89,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1739839538885,
+          "updateAt": 1740631053872,
           "createAt": 1739320957089
         }
       },
       "qraa45FW58B3ygjH8niAv": {
         "id": "qraa45FW58B3ygjH8niAv",
-        "name": "tb_marathon_details",
-        "comment": "대회 상세정보",
+        "name": "tb_marathon_course",
+        "comment": "대회별 코스/참여인원/가격 정보",
         "columnIds": [
           "xadWdjwGrju5D-sKqnMb6",
-          "PxkFsZrt4a1oHI9Ii01Jk",
-          "l3Tzizi5aN3jMcXh6-5G7"
+          "w_GRtszdG1Tp8w0qYTX09",
+          "l3Tzizi5aN3jMcXh6-5G7",
+          "WFXtl4bBdhGK_7ZVlYIZL",
+          "txgfDSErtW4vVbOkm63Wi",
+          "H3CtCMSVevpEIdV_FV_rp"
         ],
         "seqColumnIds": [
           "xadWdjwGrju5D-sKqnMb6",
           "PxkFsZrt4a1oHI9Ii01Jk",
-          "l3Tzizi5aN3jMcXh6-5G7"
+          "w_GRtszdG1Tp8w0qYTX09",
+          "l3Tzizi5aN3jMcXh6-5G7",
+          "WFXtl4bBdhGK_7ZVlYIZL",
+          "txgfDSErtW4vVbOkm63Wi",
+          "H3CtCMSVevpEIdV_FV_rp",
+          "nLk9qMsagNZkuYvQzH-V3"
         ],
         "ui": {
-          "x": 477.32,
-          "y": 374.2266,
+          "x": 2512.6726,
+          "y": 28.7591,
           "zIndex": 296,
           "widthName": 109,
-          "widthComment": 77,
+          "widthComment": 174,
           "color": "#0010FF"
         },
         "meta": {
-          "updateAt": 1739778289315,
+          "updateAt": 1740638606713,
           "createAt": 1739323433138
         }
       },
@@ -310,15 +324,15 @@
           "l9tHBoWBLJJp1WvOuFoo4"
         ],
         "ui": {
-          "x": 604.1237,
-          "y": 1070.1032,
+          "x": 444.1587,
+          "y": 972.1443,
           "zIndex": 317,
           "widthName": 68,
           "widthComment": 60,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1739778157688,
+          "updateAt": 1740631097763,
           "createAt": 1739775321331
         }
       },
@@ -335,15 +349,15 @@
           "Ji7_GY3BSIzTz01F2Ad8T"
         ],
         "ui": {
-          "x": 318.3301,
-          "y": -4.5316,
+          "x": 765.5136,
+          "y": 245.0263,
           "zIndex": 503,
           "widthName": 66,
           "widthComment": 65,
           "color": "#FFE6E6"
         },
         "meta": {
-          "updateAt": 1739840994875,
+          "updateAt": 1740631125243,
           "createAt": 1739777920250
         }
       },
@@ -372,15 +386,15 @@
           "z2M_2KNrjp83uIrig7WhJ"
         ],
         "ui": {
-          "x": 1267.7831,
-          "y": 796.217,
+          "x": 642.7347,
+          "y": 1214.4564,
           "zIndex": 627,
           "widthName": 83,
           "widthComment": 89,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1739839913881,
+          "updateAt": 1740631109580,
           "createAt": 1739839552072
         }
       },
@@ -410,15 +424,15 @@
           "9sJBiJc1j1uw0_KnZ2CiQ"
         ],
         "ui": {
-          "x": 1552.3985,
-          "y": 8.3049,
+          "x": 1188.5641,
+          "y": 264.5437,
           "zIndex": 736,
           "widthName": 60,
           "widthComment": 81,
           "color": "#00FF23"
         },
         "meta": {
-          "updateAt": 1739840986874,
+          "updateAt": 1740638686118,
           "createAt": 1739839920775
         }
       }
@@ -447,20 +461,20 @@
       "r0a6GtI10liI7NmuLVZHN": {
         "id": "r0a6GtI10liI7NmuLVZHN",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "seq",
-        "comment": "대회 코드",
+        "name": "mr_uuid",
+        "comment": "대회 코드 uuid",
         "dataType": "varchar",
         "default": "",
-        "options": 8,
+        "options": 10,
         "ui": {
-          "keys": 0,
+          "keys": 1,
           "widthName": 60,
-          "widthComment": 60,
+          "widthComment": 80,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739322722336,
+          "updateAt": 1740638523011,
           "createAt": 1739320573858
         }
       },
@@ -687,7 +701,7 @@
       "TLLVgT1a3vwZgF_YRq31T": {
         "id": "TLLVgT1a3vwZgF_YRq31T",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "subject",
+        "name": "mr_name",
         "comment": "대회명",
         "dataType": "varchar",
         "default": "",
@@ -700,67 +714,67 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840224280,
+          "updateAt": 1740631259101,
           "createAt": 1739322707831
         }
       },
       "dSMoc9Nm77_IM9wiIAE2F": {
         "id": "dSMoc9Nm77_IM9wiIAE2F",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "start_date",
-        "comment": "대회 일정",
+        "name": "mr_start_date",
+        "comment": "대회일자 YYYY-MM-DD",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
+          "widthName": 73,
+          "widthComment": 128,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840222816,
+          "updateAt": 1740631265505,
           "createAt": 1739322725367
         }
       },
       "VGxDmHv2BTDjH1nNgy8Ks": {
         "id": "VGxDmHv2BTDjH1nNgy8Ks",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "location",
+        "name": "mr_location",
         "comment": "대회 장소",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 64,
           "widthComment": 60,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840220143,
+          "updateAt": 1740631268555,
           "createAt": 1739322731751
         }
       },
       "Il8kWO0bF8REZey8CDT4u": {
         "id": "Il8kWO0bF8REZey8CDT4u",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "content",
+        "name": "mr_content",
         "comment": "대회 소개-설명-안내",
         "dataType": "text",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 62,
           "widthComment": 111,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840236333,
+          "updateAt": 1740631271210,
           "createAt": 1739322748719
         }
       },
@@ -807,20 +821,20 @@
       "PxkFsZrt4a1oHI9Ii01Jk": {
         "id": "PxkFsZrt4a1oHI9Ii01Jk",
         "tableId": "qraa45FW58B3ygjH8niAv",
-        "name": "ma_code",
-        "comment": "대회 기본 키",
+        "name": "mr_uuid",
+        "comment": "대회 코드 uuid",
         "dataType": "varchar",
         "default": "",
-        "options": 8,
+        "options": 10,
         "ui": {
-          "keys": 0,
+          "keys": 1,
           "widthName": 60,
-          "widthComment": 69,
+          "widthComment": 80,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739324145405,
+          "updateAt": 1740638576493,
           "createAt": 1739324091495
         }
       },
@@ -828,19 +842,19 @@
         "id": "xadWdjwGrju5D-sKqnMb6",
         "tableId": "qraa45FW58B3ygjH8niAv",
         "name": "seq",
-        "comment": "기본 키 ",
+        "comment": "기본 키 자동 증가 값",
         "dataType": "varchar",
         "default": "",
-        "options": 8,
+        "options": 10,
         "ui": {
-          "keys": 0,
+          "keys": 1,
           "widthName": 60,
-          "widthComment": 60,
+          "widthComment": 111,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739324141467,
+          "updateAt": 1740638562350,
           "createAt": 1739324106936
         }
       },
@@ -1427,20 +1441,20 @@
       "gj602dUOR7gYSLfa1K6aC": {
         "id": "gj602dUOR7gYSLfa1K6aC",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "company",
+        "name": "mr_company",
         "comment": "대회 주관사",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 70,
           "widthComment": 65,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840957295,
+          "updateAt": 1740631273045,
           "createAt": 1739777889218
         }
       },
@@ -1487,47 +1501,47 @@
       "l3Tzizi5aN3jMcXh6-5G7": {
         "id": "l3Tzizi5aN3jMcXh6-5G7",
         "tableId": "qraa45FW58B3ygjH8niAv",
-        "name": "",
-        "comment": "",
-        "dataType": "",
+        "name": "mr_course_type",
+        "comment": "참여 코스 종류",
+        "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
+          "widthName": 85,
+          "widthComment": 81,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739778289314,
+          "updateAt": 1740638448864,
           "createAt": 1739778289314
         }
       },
       "3xj0STrkVRRGWJPz4Seb4": {
         "id": "3xj0STrkVRRGWJPz4Seb4",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "course_type",
+        "name": "mr_course_type",
         "comment": "대회 종목(다중선택)",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 65,
+          "widthName": 85,
           "widthComment": 109,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840149530,
+          "updateAt": 1740631275342,
           "createAt": 1739778294395
         }
       },
       "dsIo8720NQbBnPe5NlzM_": {
         "id": "dsIo8720NQbBnPe5NlzM_",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "reg_dt",
+        "name": "mr_reg_dt",
         "comment": "대회 관리 등록일",
         "dataType": "varchar",
         "default": "",
@@ -1540,7 +1554,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840208160,
+          "updateAt": 1740631290438,
           "createAt": 1739778584682
         }
       },
@@ -1887,49 +1901,49 @@
       "Qew4hLq1yyb61izdRSEWQ": {
         "id": "Qew4hLq1yyb61izdRSEWQ",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "reg_adm",
+        "name": "mr_reg_adm",
         "comment": "대회 등록 관리자",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 67,
           "widthComment": 93,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840210863,
+          "updateAt": 1740631288035,
           "createAt": 1739840176021
         }
       },
       "raZECWGjSebfT5PFiGjff": {
         "id": "raZECWGjSebfT5PFiGjff",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "mod_dt",
+        "name": "mr_mod_dt",
         "comment": "대회 관리 수정일",
         "dataType": "varchar",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 62,
           "widthComment": 93,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840212327,
+          "updateAt": 1740631292724,
           "createAt": 1739840188295
         }
       },
       "xla5kZ_ekR2iduSOPIP8L": {
         "id": "xla5kZ_ekR2iduSOPIP8L",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "etc",
+        "name": "mr_etc",
         "comment": "대회 기타 정보",
-        "dataType": "varchar",
+        "dataType": "content",
         "default": "",
         "options": 0,
         "ui": {
@@ -1940,7 +1954,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1739840252196,
+          "updateAt": 1740631298655,
           "createAt": 1739840225591
         }
       },
@@ -2023,9 +2037,304 @@
           "updateAt": 1740098805270,
           "createAt": 1740098618940
         }
+      },
+      "-7KmpxLtgrFXeZra2MErx": {
+        "id": "-7KmpxLtgrFXeZra2MErx",
+        "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+        "name": "",
+        "comment": "",
+        "dataType": "",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638517209,
+          "createAt": 1740628993860
+        }
+      },
+      "3PG1XusdetHlYvtlg5OBF": {
+        "id": "3PG1XusdetHlYvtlg5OBF",
+        "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+        "name": "",
+        "comment": "",
+        "dataType": "varchar",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638218672,
+          "createAt": 1740631001623
+        }
+      },
+      "WFXtl4bBdhGK_7ZVlYIZL": {
+        "id": "WFXtl4bBdhGK_7ZVlYIZL",
+        "tableId": "qraa45FW58B3ygjH8niAv",
+        "name": "mr_course_numeric",
+        "comment": "코스 제한인원",
+        "dataType": "varchar",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 77,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638311729,
+          "createAt": 1740631003305
+        }
+      },
+      "txgfDSErtW4vVbOkm63Wi": {
+        "id": "txgfDSErtW4vVbOkm63Wi",
+        "tableId": "qraa45FW58B3ygjH8niAv",
+        "name": "mr_course_price",
+        "comment": "코스 금액",
+        "dataType": "",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 87,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638323361,
+          "createAt": 1740638277873
+        }
+      },
+      "H3CtCMSVevpEIdV_FV_rp": {
+        "id": "H3CtCMSVevpEIdV_FV_rp",
+        "tableId": "qraa45FW58B3ygjH8niAv",
+        "name": "mr_course_recode",
+        "comment": "코스 참여 제한 기록",
+        "dataType": "",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 98,
+          "widthComment": 108,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638379979,
+          "createAt": 1740638325496
+        }
+      },
+      "nLk9qMsagNZkuYvQzH-V3": {
+        "id": "nLk9qMsagNZkuYvQzH-V3",
+        "tableId": "qraa45FW58B3ygjH8niAv",
+        "name": "mr_uuid",
+        "comment": "대회 코드 uuid",
+        "dataType": "varchar",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 80,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638542929,
+          "createAt": 1740638542929
+        }
+      },
+      "GJbqDBtfHAb-7_XZW_5A3": {
+        "id": "GJbqDBtfHAb-7_XZW_5A3",
+        "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+        "name": "seq",
+        "comment": "기본 키 자동 증가 값",
+        "dataType": "varchar",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 111,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638584721,
+          "createAt": 1740638584719
+        }
+      },
+      "o4pRaiyEg_i72929Yp8ne": {
+        "id": "o4pRaiyEg_i72929Yp8ne",
+        "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+        "name": "mr_uuid",
+        "comment": "대회 코드 uuid",
+        "dataType": "varchar",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 80,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638584721,
+          "createAt": 1740638584721
+        }
+      },
+      "w_GRtszdG1Tp8w0qYTX09": {
+        "id": "w_GRtszdG1Tp8w0qYTX09",
+        "tableId": "qraa45FW58B3ygjH8niAv",
+        "name": "mr_uuid",
+        "comment": "대회 코드 uuid",
+        "dataType": "varchar",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 80,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1740638601882,
+          "createAt": 1740638601881
+        }
       }
     },
-    "relationshipEntities": {},
+    "relationshipEntities": {
+      "-Tt6sarjRhcqPsKk_6pOx": {
+        "id": "-Tt6sarjRhcqPsKk_6pOx",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+          "columnIds": [
+            "3PG1XusdetHlYvtlg5OBF"
+          ],
+          "x": 2281.4199,
+          "y": 198.6937,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "qraa45FW58B3ygjH8niAv",
+          "columnIds": [
+            "WFXtl4bBdhGK_7ZVlYIZL"
+          ],
+          "x": 2512.6726,
+          "y": 128.7591,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1740631003307,
+          "createAt": 1740631003307
+        }
+      },
+      "n9MLfJcUOHfjZDaI76k12": {
+        "id": "n9MLfJcUOHfjZDaI76k12",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+          "columnIds": [
+            "r0a6GtI10liI7NmuLVZHN"
+          ],
+          "x": 2281.4199,
+          "y": 186.6937,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "qraa45FW58B3ygjH8niAv",
+          "columnIds": [
+            "nLk9qMsagNZkuYvQzH-V3"
+          ],
+          "x": 2512.6726,
+          "y": 140.7591,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1740638542929,
+          "createAt": 1740638542929
+        }
+      },
+      "kyDvIovgr4waG4t-al4Ac": {
+        "id": "kyDvIovgr4waG4t-al4Ac",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "qraa45FW58B3ygjH8niAv",
+          "columnIds": [
+            "xadWdjwGrju5D-sKqnMb6",
+            "PxkFsZrt4a1oHI9Ii01Jk"
+          ],
+          "x": 2512.6726,
+          "y": 128.7591,
+          "direction": 1
+        },
+        "end": {
+          "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+          "columnIds": [
+            "GJbqDBtfHAb-7_XZW_5A3",
+            "o4pRaiyEg_i72929Yp8ne"
+          ],
+          "x": 2281.4199,
+          "y": 210.6937,
+          "direction": 2
+        },
+        "meta": {
+          "updateAt": 1740638584721,
+          "createAt": 1740638584721
+        }
+      },
+      "Z87qrY8FVfFDaylcFcURz": {
+        "id": "Z87qrY8FVfFDaylcFcURz",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "m1mHlBQZtFx0ov-YRFdAO",
+          "columnIds": [
+            "r0a6GtI10liI7NmuLVZHN"
+          ],
+          "x": 2281.4199,
+          "y": 186.6937,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "qraa45FW58B3ygjH8niAv",
+          "columnIds": [
+            "w_GRtszdG1Tp8w0qYTX09"
+          ],
+          "x": 2512.6726,
+          "y": 128.7591,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1740638601882,
+          "createAt": 1740638601882
+        }
+      }
+    },
     "indexEntities": {
       "f0ise-hT8vgIJeOL45JEF": {
         "id": "f0ise-hT8vgIJeOL45JEF",
@@ -2066,35 +2375,19 @@
     },
     "indexColumnEntities": {},
     "memoEntities": {
-      "8YEeuty7ssiFUWiiqheKN": {
-        "id": "8YEeuty7ssiFUWiiqheKN",
-        "value": "",
-        "ui": {
-          "x": 159.79381443298968,
-          "y": 67.01030927835052,
-          "zIndex": 314,
-          "width": 116,
-          "height": 100,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1739773993649,
-          "createAt": 1739773979884
-        }
-      },
       "k0MbhyvMJnCsRlKB-IOtb": {
         "id": "k0MbhyvMJnCsRlKB-IOtb",
         "value": "매우만족 ~ 불만족) 별 다섯개\n코스 난이도 평가\n코스 경관 평가(풍경 등)\n대회 보급 관련 평가\n운영 정보 평가\n참여자 대회 분위기 정보 \n기념품 평가\n메달 디자인 평가 (매우만족 ~ 불만족)\n참가비 대비 만족도 (가성비 여부)\n유튜브 리뷰 공유 주소 등\n\n장점\n단점\n참가자 정보 공유\n재 참여 여부\n\n\n참가자별 기록 데이터 공유\n기록 공유 스샷\n코스 이미지 공유 종합\n\n=== \n기록 관리. 되면 더 좋고",
         "ui": {
-          "x": 1460.7006,
-          "y": 1060.1109,
+          "x": 1170.4567,
+          "y": 985.7207,
           "zIndex": 537,
           "width": 333,
           "height": 262,
           "color": ""
         },
         "meta": {
-          "updateAt": 1739839909875,
+          "updateAt": 1740631094274,
           "createAt": 1739777993965
         }
       },
@@ -2102,32 +2395,16 @@
         "id": "ccFJCYQlu25qSi0wdL5j9",
         "value": "대회종목 분류\nFull Course\n32K Course\nHalf  Course\n10K  Course\n5K Course\n걷기\n기타",
         "ui": {
-          "x": 1554.2983,
-          "y": 262.717,
+          "x": 1634.7861,
+          "y": 267.595,
           "zIndex": 596,
           "width": 118,
           "height": 148,
           "color": ""
         },
         "meta": {
-          "updateAt": 1739841004878,
+          "updateAt": 1740638680334,
           "createAt": 1739778302402
-        }
-      },
-      "I9-KDCU_DvIJEHbEQub37": {
-        "id": "I9-KDCU_DvIJEHbEQub37",
-        "value": "마라톤 대회 관리\n",
-        "ui": {
-          "x": 444.7062,
-          "y": 137.9753,
-          "zIndex": 612,
-          "width": 116,
-          "height": 100,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1739778618771,
-          "createAt": 1739778610785
         }
       }
     }
@@ -2180,7 +2457,7 @@
       1739320543033,
       -1,
       {
-        "name": 1739323514931,
+        "name": 1740630429938,
         "comment": 1739322704127,
         "ui.color": 1739324158566
       }
@@ -2190,10 +2467,11 @@
       1739320573857,
       -1,
       {
-        "name": 1739320576916,
+        "name": 1740631252735,
         "dataType": 1739320579189,
         "options(notNull)": 1739320581297,
-        "comment": 1739322722335
+        "comment": 1740630444535,
+        "options(primaryKey)": 1740638523011
       }
     ],
     "bD8bxf99n1k0Q2oQecjjD": [
@@ -2342,7 +2620,7 @@
       1739322707831,
       -1,
       {
-        "name": 1739322713155,
+        "name": 1740631259100,
         "comment": 1739322719168,
         "dataType": 1739840224279
       }
@@ -2352,8 +2630,8 @@
       1739322725367,
       -1,
       {
-        "comment": 1739777904319,
-        "name": 1739322779981,
+        "comment": 1740630535537,
+        "name": 1740631265504,
         "dataType": 1739840222815
       }
     ],
@@ -2363,7 +2641,7 @@
       -1,
       {
         "comment": 1739777903320,
-        "name": 1739323494379,
+        "name": 1740631268554,
         "dataType": 1739840220143
       }
     ],
@@ -2374,7 +2652,7 @@
       {
         "comment": 1739840236333,
         "dataType": 1739322758882,
-        "name": 1739323489858
+        "name": 1740631271206
       }
     ],
     "_bKk_dXf0Ziij_4WP2Wag": [
@@ -2402,20 +2680,21 @@
       1739323433137,
       -1,
       {
-        "name": 1739324086831,
-        "comment": 1739324070600,
+        "name": 1740629126901,
+        "comment": 1740629140041,
         "ui.color": 1739324152305
       }
     ],
     "PxkFsZrt4a1oHI9Ii01Jk": [
       "tableColumnEntities",
       1739324091495,
-      -1,
+      1740638604774,
       {
-        "name": 1739324103911,
+        "name": 1740631369594,
         "options(notNull)": 1739324113767,
         "dataType": 1739324116673,
-        "comment": 1739324145405
+        "comment": 1740631330871,
+        "options(primaryKey)": 1740638576492
       }
     ],
     "xadWdjwGrju5D-sKqnMb6": [
@@ -2426,7 +2705,8 @@
         "name": 1739324110917,
         "options(notNull)": 1739324113239,
         "dataType": 1739324118672,
-        "comment": 1739324141467
+        "comment": 1740631324498,
+        "options(primaryKey)": 1740638562348
       }
     ],
     "i-XCnOWSmMK2upNToyc8Q": [
@@ -2500,14 +2780,6 @@
         "comment": 1739324422670,
         "name": 1739324432524,
         "dataType": 1739324435590
-      }
-    ],
-    "8YEeuty7ssiFUWiiqheKN": [
-      "memoEntities",
-      1739773979883,
-      1739774195487,
-      {
-        "value": 1739773993649
       }
     ],
     "gvVlCmOFh8cDq0FGapLVi": [
@@ -2722,7 +2994,7 @@
       -1,
       {
         "comment": 1739777900410,
-        "name": 1739840126778,
+        "name": 1740631273043,
         "dataType": 1739840957295
       }
     ],
@@ -2764,16 +3036,20 @@
       "tableColumnEntities",
       1739778289314,
       -1,
-      {}
+      {
+        "name": 1740638188391,
+        "dataType": 1740638214957,
+        "comment": 1740638448862
+      }
     ],
     "3xj0STrkVRRGWJPz4Seb4": [
       "tableColumnEntities",
       1739778294394,
-      -1,
+      1740631283676,
       {
         "comment": 1739840149530,
         "dataType": 1739840130294,
-        "name": 1739840143152
+        "name": 1740631275341
       }
     ],
     "ccFJCYQlu25qSi0wdL5j9": [
@@ -2789,17 +3065,9 @@
       1739778584681,
       -1,
       {
-        "name": 1739840165691,
+        "name": 1740631290436,
         "comment": 1739840176020,
         "dataType": 1739840208159
-      }
-    ],
-    "I9-KDCU_DvIJEHbEQub37": [
-      "memoEntities",
-      1739778610785,
-      1739840981732,
-      {
-        "value": 1739778616555
       }
     ],
     "VLlbT2xb-1cSdnPZO_BTp": [
@@ -2994,7 +3262,7 @@
       1739840176020,
       -1,
       {
-        "name": 1739840179978,
+        "name": 1740631288033,
         "comment": 1739840188294,
         "dataType": 1739840210863
       }
@@ -3004,7 +3272,7 @@
       1739840188295,
       -1,
       {
-        "name": 1739840192257,
+        "name": 1740631292722,
         "comment": 1739840204673,
         "dataType": 1739840212327
       }
@@ -3014,8 +3282,8 @@
       1739840225591,
       -1,
       {
-        "name": 1739840240765,
-        "dataType": 1739840243879,
+        "name": 1740631294707,
+        "dataType": 1740631298654,
         "comment": 1739840252196
       }
     ],
@@ -3061,6 +3329,125 @@
         "comment": 1740098805269,
         "options(primaryKey)": 1740098796462
       }
+    ],
+    "-7KmpxLtgrFXeZra2MErx": [
+      "tableColumnEntities",
+      1740628993856,
+      -1,
+      {
+        "name": 1740638517208
+      }
+    ],
+    "3PG1XusdetHlYvtlg5OBF": [
+      "tableColumnEntities",
+      1740631001611,
+      1740638525660,
+      {
+        "options(primaryKey)": 1740631001611,
+        "dataType": 1740638218671
+      }
+    ],
+    "WFXtl4bBdhGK_7ZVlYIZL": [
+      "tableColumnEntities",
+      1740631003298,
+      -1,
+      {
+        "options(notNull)": 1740638207072,
+        "name": 1740638263748,
+        "dataType": 1740638218671,
+        "default": 1740631003298,
+        "comment": 1740638311728
+      }
+    ],
+    "-Tt6sarjRhcqPsKk_6pOx": [
+      "relationshipEntities",
+      1740631003298,
+      1740638525660,
+      {}
+    ],
+    "txgfDSErtW4vVbOkm63Wi": [
+      "tableColumnEntities",
+      1740638277871,
+      -1,
+      {
+        "name": 1740638319314,
+        "comment": 1740638323361
+      }
+    ],
+    "H3CtCMSVevpEIdV_FV_rp": [
+      "tableColumnEntities",
+      1740638325495,
+      -1,
+      {
+        "name": 1740638357746,
+        "comment": 1740638379976
+      }
+    ],
+    "nLk9qMsagNZkuYvQzH-V3": [
+      "tableColumnEntities",
+      1740638542926,
+      1740638554316,
+      {
+        "options(notNull)": 1740638542926,
+        "name": 1740638542926,
+        "dataType": 1740638542926,
+        "default": 1740638542926,
+        "comment": 1740638542926
+      }
+    ],
+    "n9MLfJcUOHfjZDaI76k12": [
+      "relationshipEntities",
+      1740638542926,
+      1740638554316,
+      {}
+    ],
+    "GJbqDBtfHAb-7_XZW_5A3": [
+      "tableColumnEntities",
+      1740638584712,
+      1740638587028,
+      {
+        "options(notNull)": 1740638584712,
+        "name": 1740638584712,
+        "dataType": 1740638584712,
+        "default": 1740638584712,
+        "comment": 1740638584712
+      }
+    ],
+    "o4pRaiyEg_i72929Yp8ne": [
+      "tableColumnEntities",
+      1740638584712,
+      1740638587028,
+      {
+        "options(notNull)": 1740638584712,
+        "name": 1740638584712,
+        "dataType": 1740638584712,
+        "default": 1740638584712,
+        "comment": 1740638584712
+      }
+    ],
+    "kyDvIovgr4waG4t-al4Ac": [
+      "relationshipEntities",
+      1740638584712,
+      1740638587028,
+      {}
+    ],
+    "w_GRtszdG1Tp8w0qYTX09": [
+      "tableColumnEntities",
+      1740638601879,
+      -1,
+      {
+        "options(notNull)": 1740638601879,
+        "name": 1740638601879,
+        "dataType": 1740638601879,
+        "default": 1740638601879,
+        "comment": 1740638601879
+      }
+    ],
+    "Z87qrY8FVfFDaylcFcURz": [
+      "relationshipEntities",
+      1740638601879,
+      -1,
+      {}
     ]
   }
 }

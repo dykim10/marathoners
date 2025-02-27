@@ -47,3 +47,7 @@ decorator:
         p6spy:
             log-format: executionTime:%(executionTime) ms | sql:%(sql)
             enable-logging: 'true'
+
+public:
+    api:
+        service-key: "Zcfv%2Fo8xqsCuuPEht%2FsTuNPf0GJK43LLyi2fGmOagiVXG2Xl%2BEVTzhkuOhQvngART1BeBn7bVhCZROt3iR44bQ%3D%3D"
