@@ -46,7 +46,9 @@ export default function LoginPage() {
 
             checkSession(); // 로그인 후 세션 체크 실행
 
-            router.push("/");
+            //router.push("/"); //CSR 방식이라, 클라이언트에서 페이지만 바꿔치기라서, 다른 곳 적용이 안되는 모습이 보임.
+            window.location.href = "/"; // ✅ 가장 확실한 방법 (완전한 새로고침)
+
         } catch (error) {
             setError(error.message);
         }

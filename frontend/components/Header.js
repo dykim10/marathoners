@@ -25,7 +25,9 @@ export default function Header() {
             });
 
             setIsLoggedIn(false);
-            router.push("/login"); // 로그아웃 후 로그인 페이지로 이동
+            //router.push("/"); // 로그아웃 후 메인 페이지로 이동 (CSR 방식이라는 점을 알아둬야한다.)
+            window.location.href = "/";
+
         } catch (error) {
             console.error(" 로그아웃 실패:", error);
         }
