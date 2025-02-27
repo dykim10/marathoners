@@ -14,17 +14,29 @@
         <result property="userRegDt" column="user_reg_dt"/>
     </resultMap>
 
+    <!-- 공통 사용자 리스트 조회 쿼리 -->
+    <sql id="userListBaseQuery">
+        FROM tb_users
+        WHERE
+            (#{keyword} IS NULL OR user_id ILIKE '%' || #{keyword} || '%' OR user_name ILIKE '%' || #{keyword} || '%')
+    </sql>
+
+    <!-- 공통 컬럼 목록 정의 -->
+    <sql id="userSelectColumns">
+        user_uuid, user_id, user_password, user_email
+        , user_name, user_role, user_reg_dt, user_last_login_dt
+    </sql>
+
     <!-- user_name으로 사용자 조회 -->
     <select id="findByUserName" parameterType="String" resultType="UserResponse">
-        SELECT user_uuid, user_id, user_password, user_email, user_role
+        SELECT <include refid="userSelectColumns"/>
         FROM tb_users
         WHERE user_name = #{userName}
     </select>
 
     <!-- user_id로 사용자 조회 -->
     <select id="findByUserId" parameterType="String" resultMap="UserResultMap">
-        SELECT user_uuid, user_id, user_password, user_email, user_name
-             , user_role, user_reg_dt
+        SELECT <include refid="userSelectColumns"/>
         FROM tb_users
         WHERE user_id = #{userId}
         AND user_status = 'Y'
@@ -77,5 +89,24 @@
         </set>
         where user_uuid = #{userUuid};
     </update>
+
+
+
+    <!-- 사용자 리스트 조회 -->
+    <select id="getUserList" parameterType="userRequest" resultMap="UserResultMap">
+        SELECT <include refid="userSelectColumns"/>
+        <include refid="userListBaseQuery"/>
+        ORDER BY user_reg_dt DESC
+        LIMIT #{rows} OFFSET #{offset}
+    </select>
+
+    <!-- 총 사용자 개수 조회 -->
+    <select id="getTotalUserCount" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM (
+            SELECT user_uuid
+            <include refid="userListBaseQuery"/>
+        ) AS total_users
+    </select>
 
 </mapper>

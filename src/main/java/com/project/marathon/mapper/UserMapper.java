@@ -6,6 +6,7 @@ import com.project.marathon.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -22,4 +23,8 @@ public interface UserMapper {
 
     int countByUserId(@Param("userId") String userId);
     int countByUserEmail(@Param("userEmail") String userEmail);
+
+    List<UserResponse> getUserList(String keyword, int rows, int offset);
+
+    int getTotalUserCount(String keyword);
 }

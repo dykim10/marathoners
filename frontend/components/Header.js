@@ -42,7 +42,7 @@ export default function Header() {
                     <Nav className="ms-auto">
                         <Nav.Link href="/">Home</Nav.Link>
                         {isLoggedIn ? (
-                            <Button variant="danger" onClick={handleLogout}>Logout</Button>
+                            <Button variant="danger" className="btn btn-danger btn-sm" onClick={handleLogout}>Logout</Button>
                         ) : (
                             <Nav.Link href="/auth/login">Login</Nav.Link>
                         )}

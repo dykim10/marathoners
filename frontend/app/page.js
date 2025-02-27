@@ -13,47 +13,38 @@ export default function Home() {
     useEffect(() => {
         //백엔드 세션 확인 (Spring Boot API 호출)
         const verifySession = async () => {
-            const sessionExists = await checkSession(); //공통 함수 호출
-            if (sessionExists) {
-                setIsLoggedIn(true);
-                console.log("세션 확인 완료, 비즈니스 로직 실행 가능");
-                //TO-DO 비지니스 로직 실행 진행. 여기서 추가 개발 과정에서 참고 해야 할 코드
-
-
-            } else {
-                setIsLoggedIn(false);
-                console.log("세션 없음, 로그인 필요");
+            try {
+                const sessionExists = await checkSession();
+                setIsLoggedIn(sessionExists);
+            } catch (error) {
+                console.error("세션 확인 중 오류 발생:", error);
             }
         };
 
         verifySession();
     }, []);
 
+    const handleNavigation = (path) => {
+        router.push(path);
+    };
+
     //console.log(">> " + isLoggedIn);
     const handleLogout = async () => {
         try {
-            //console.log("로그아웃 요청 시작: /api/logout");
-
             const response = await fetch("/api/logout", {
                 method: "POST",
                 credentials: "include",
             });
 
-            //console.log("로그아웃 요청 응답 상태:", response.status);
+            if (!response.ok) throw new Error("로그아웃 실패");
 
-            if (!response.ok) {
-                throw new Error("로그아웃 실패");
-            }
-
-            // ✅ 로그아웃 후 `checkSession()` 실행하여 상태 업데이트
+            // 로그아웃 후 `checkSession()` 실행하여 상태 업데이트
             const sessionExists = await checkSession();
             setIsLoggedIn(sessionExists);
 
             //console.log("로그아웃 후 세션 상태 확인:", sessionExists);
 
-            if (!sessionExists) {
-                router.push("/auth/login"); // 로그인 페이지로 이동
-            }
+            if (!sessionExists) router.push("/auth/login"); // 로그인 페이지로 이동
 
         } catch (error) {
             console.error("로그아웃 실패:", error);
@@ -63,6 +54,12 @@ export default function Home() {
     const handleMyInfo = () => {
         router.push("/user/me"); //클릭 시 `/user/me` 페이지로 이동
     };
+
+    const features = [
+        { title: "대회 정보", text: "대회 정보 게시판 연결", path: "/competition/info" },
+        { title: "회원 정보", text: "회원 정보 게시판 연결", path: "/user/list" },
+        { title: "Feature 3", text: "Explain the third feature concisely.", path: "/feature3" }
+    ];
 
     return (
         <Container className="mt-4">
@@ -89,15 +86,16 @@ export default function Home() {
                 </Col>
             </Row>
 
+            {/* 기능 카드 목록 */}
             <Container className="mt-5">
                 <Row className="g-4">
-                    {[
-                        { title: "대회 정보", text: "대회 정보 게시판 연결" },
-                        { title: "회원 정보", text: "회원 정보 게시판 연결" },
-                        { title: "Feature 3", text: "Explain the third feature concisely." }
-                    ].map((feature, index) => (
+                    {features.map((feature, index) => (
                         <Col md={4} key={index}>
-                            <Card className="h-100 shadow-sm">
+                            <Card
+                                className="h-100 shadow-sm"
+                                onClick={() => handleNavigation(feature.path)}
+                                style={{ cursor: "pointer" }}
+                            >
                                 <Card.Body>
                                     <Card.Title>{feature.title}</Card.Title>
                                     <Card.Text>{feature.text}</Card.Text>

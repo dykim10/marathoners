@@ -2,6 +2,7 @@ package com.project.marathon.controller;
 
 import com.project.marathon.dto.UserRequest;
 import com.project.marathon.dto.UserResponse;
+import com.project.marathon.dto.UserSearchDto;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,9 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -90,5 +94,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/userlist")
+    public ResponseEntity<Map<String, Object>> getUserList(@RequestBody UserSearchDto searchDto) {
+        List<UserResponse> users = userService.getUserList(searchDto.getKeyword(), searchDto.getPage(), searchDto.getRows());
+        int totalUsers = userService.getTotalUserCount(searchDto.getKeyword());
+        int totalPages = (int) Math.ceil((double) totalUsers / searchDto.getRows());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("users", users);
+        response.put("totalPages", totalPages);
+
+        return ResponseEntity.ok(response);
+    }
 }
 

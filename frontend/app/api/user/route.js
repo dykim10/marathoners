@@ -107,7 +107,7 @@ export async function GET(request) {
                 "Content-Type": "application/json",
                 Cookie: cookieHeader || "",
             },
-            credentials: "include",  // ✅ 인증 정보를 포함 (세션/쿠키 유지)
+            credentials: "include",  // 인증 정보를 포함 (세션/쿠키 유지)
         });
 
         if (!response.ok) {

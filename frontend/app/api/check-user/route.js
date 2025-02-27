@@ -3,7 +3,6 @@ export async function POST(req) {
         // 클라이언트에서 받은 데이터 파싱
         const { type, value } = await req.json();
         const API_URL = process.env.NEXT_PUBLIC_API_URL; // Spring Boot 서버 URL
-        console.log("type=>", type, "value=>", value);
 
         // 백엔드 API 요청 API_URL 연결할 때는 ` 백틱 문자 활용하기.
         const response = await fetch(`${API_URL}/api/check-user`, {

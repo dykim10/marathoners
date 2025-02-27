@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -147,4 +148,19 @@ public class UserService {
         }
         return userResponse;
     }
+
+    public List<UserResponse> getUserList(String keyword, int page, int rows) {
+        int offset = (page - 1) * rows;
+        List<UserResponse> userlist =  userMapper.getUserList(keyword, rows, offset);
+
+        logger.info(userlist.toString());
+        return userlist;
+    }
+
+    public int getTotalUserCount(String keyword) {
+        int totalCnt = userMapper.getTotalUserCount(keyword);
+        logger.info("totalCnt => {} ", totalCnt);
+        return totalCnt;
+    }
+
 }
