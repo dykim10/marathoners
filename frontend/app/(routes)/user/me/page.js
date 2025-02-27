@@ -4,13 +4,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button, Card } from 'react-bootstrap';
+import { useRouter } from "next/navigation";
 
 export default function UserProfilePage() {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const router = useRouter();
+    
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -30,31 +32,30 @@ export default function UserProfilePage() {
     }, []);
 
     if (loading)
-        return <div className="flex justify-center items-center h-screen text-lg font-semibold">⏳ 로딩 중...</div>;
+        return <div className="flex justify-center items-center h-screen text-lg font-semibold">로딩 중...</div>;
 
     if (error)
         return <div className="flex justify-center items-center h-screen text-red-600 font-semibold">{error}</div>;
 
     return (
-        <div className="flex justify-center mt-8">
+        <div className="flex flex-col items-center mt-8 space-y-4">
             <UserInfoCard userData={userData} />
+            <Button onClick={() => router.push("/user/modify")} className="w-40">
+                내 정보 수정하기
+            </Button>
         </div>
     );
 }
 
 function UserInfoCard({ userData }) {
     return (
-        <Card className="w-96 shadow-lg">
-            <CardHeader>
-                <CardTitle className="text-xl text-center">내 정보</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="space-y-3 text-gray-700">
-                    <InfoRow label="아이디" value={userData.userId} />
-                    <InfoRow label="이메일" value={userData.userEmail} />
-                    <InfoRow label="이름" value={userData.userName} />
-                </div>
-            </CardContent>
+        <Card style={{ width: "24rem" }} className="shadow-sm">
+            <Card.Header className="text-center fw-bold">내 정보</Card.Header>
+            <Card.Body>
+                <InfoRow label="아이디" value={userData.userId} />
+                <InfoRow label="이메일" value={userData.userEmail} />
+                <InfoRow label="이름" value={userData.userName} />
+            </Card.Body>
         </Card>
     );
 }

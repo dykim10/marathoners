@@ -14,7 +14,6 @@ export default function Home() {
         //백엔드 세션 확인 (Spring Boot API 호출)
         const verifySession = async () => {
             const sessionExists = await checkSession(); //공통 함수 호출
-            console.log("? => " + sessionExists);
             if (sessionExists) {
                 setIsLoggedIn(true);
                 console.log("세션 확인 완료, 비즈니스 로직 실행 가능");

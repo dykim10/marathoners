@@ -1,6 +1,6 @@
 "use client";
 
-import UserForm from "@/components/UserForm";
+import UserForm from "@/app/components/UserForm";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ export default function EditProfilePage() {
     const router = useRouter();
 
     useEffect(() => {
-        fetch("/api/user/me")
+        fetch("/api/user")
             .then((res) => res.json())
             .then((data) => setUserData(data));
     }, []);
@@ -24,7 +24,7 @@ export default function EditProfilePage() {
 
         if (response.ok) {
             alert("정보가 수정되었습니다.");
-            router.push("/user/profile");
+            router.push("/user/me");    //내 정보가 수정되었으니 내 페이지로 리드
         } else {
             alert("정보 수정 실패");
         }

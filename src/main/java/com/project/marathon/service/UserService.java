@@ -91,4 +91,39 @@ public class UserService {
         return response;
     }
 
+    public UserResponse modifyUser(UserRequest userRequest){
+
+        UserResponse response = new UserResponse();
+        logger.info("service ::: userRequest => {}", userRequest);
+
+        //이메일 중복검사 수정.
+        if (userRequest.getUserEmail() != null && !userRequest.getUserEmail().isEmpty()) { // null 체크 추가
+            if (userMapper.countByUserEmail(userRequest.getUserEmail()) > 0) {
+                response.setUserExists(UserStatus.EMAIL_EXISTS);
+                response.setMessage("이미 등록된 이메일입니다.");
+                return response;
+            }
+        }
+
+        //비밀번호 수정으로 입력이 되었다면 암호화 저장처리..
+        if (userRequest.getUserPassword() != null && !userRequest.getUserPassword().isEmpty()) { //null 체크 추가
+            //비밀번호 암호화 & 암호화된 비밀번호로 객체 업데이트
+            String encodedPassword = passwordEncoder.encode(userRequest.getUserPassword());
+            userRequest.setUserPassword(encodedPassword);
+        }
+        logger.info("mapper ::: userRequest => {}", userRequest);
+
+        //회원정보 처리 (DB에 저장)
+        int result = userMapper.modifyUser(userRequest);
+        logger.info("result ::: userRequest => {}", userRequest);
+        if(result > 0) {
+            response.setUserRegStatus(UserStatus.USER_REGISTER_SUCCESS);
+            response.setMessage("회원가입이 완료되었습니다.");
+        } else {
+            response.setUserRegStatus(UserStatus.USER_REGISTER_FAIL);
+            response.setMessage("회원가입에 실패하였습니다. 다시 시도해주세요..");
+        }
+        return response;
+    }
+
 }

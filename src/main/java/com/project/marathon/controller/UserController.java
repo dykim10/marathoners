@@ -61,4 +61,17 @@ public class UserController {
 
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> modifyUser(@RequestBody UserRequest userRequest){
+
+        logger.info("controller ::: userRequest => {}", userRequest);
+
+        UserResponse response = userService.modifyUser(userRequest);
+        if (response.getUserRegStatus() == UserStatus.USER_REGISTER_SUCCESS) {
+            return ResponseEntity.ok(response); // 성공 시 200 OK 반환
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response); // 실패 시 500 반환
+        }
+    }
 }
+

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "next": "15.1.7",

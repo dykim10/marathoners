@@ -49,4 +49,20 @@
     <select id="countByUserEmail" resultType="int">
         SELECT COUNT(*) FROM tb_users WHERE user_email = #{userEmail}
     </select>
+
+    <update id="modifyUser" parameterType="UserRequest">
+        update tb_users
+        <set>
+            user_name = #{userName},
+            user_modify_dt = now()
+            <if test="userEmail != null and userEmail != ''">
+                , user_email = #{userEmail}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                , user_password = #{userPassword}
+            </if>
+        </set>
+        where user_uuid = #{userUuid};
+    </update>
+
 </mapper>
