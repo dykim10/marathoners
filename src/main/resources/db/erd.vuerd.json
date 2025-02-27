@@ -4,8 +4,8 @@
   "settings": {
     "width": 3000,
     "height": 3000,
-    "scrollTop": -484,
-    "scrollLeft": -1709,
+    "scrollTop": -582,
+    "scrollLeft": -1799,
     "zoomLevel": 0.97,
     "show": 431,
     "database": 16,
@@ -53,7 +53,8 @@
     ],
     "memoIds": [
       "k0MbhyvMJnCsRlKB-IOtb",
-      "ccFJCYQlu25qSi0wdL5j9"
+      "ccFJCYQlu25qSi0wdL5j9",
+      "LPzsGuNn0i7h1XHI9htIv"
     ]
   },
   "collections": {
@@ -262,15 +263,15 @@
           "spGpVfU5TmqN4m05LYvlA"
         ],
         "ui": {
-          "x": 1836.6739,
-          "y": 535.1334,
+          "x": 1834.612,
+          "y": 520.7005,
           "zIndex": 128,
           "widthName": 134,
           "widthComment": 93,
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1740639938714,
+          "updateAt": 1740660940204,
           "createAt": 1739320957089
         }
       },
@@ -2506,17 +2507,17 @@
     "memoEntities": {
       "k0MbhyvMJnCsRlKB-IOtb": {
         "id": "k0MbhyvMJnCsRlKB-IOtb",
-        "value": "매우만족 ~ 불만족) 별 다섯개\n코스 난이도 평가\n코스 경관 평가(풍경 등)\n대회 보급 관련 평가\n운영 정보 평가\n참여자 대회 분위기 정보 \n기념품 평가\n메달 디자인 평가 (매우만족 ~ 불만족)\n참가비 대비 만족도 (가성비 여부)\n유튜브 리뷰 공유 주소 등\n\n장점\n단점\n참가자 정보 공유\n재 참여 여부\n\n\n참가자별 기록 데이터 공유\n기록 공유 스샷\n코스 이미지 공유 종합\n\n=== \n기록 관리. 되면 더 좋고",
+        "value": "",
         "ui": {
-          "x": 1836.4366,
-          "y": 763.0399,
+          "x": 1634.3747,
+          "y": 862.0089,
           "zIndex": 537,
           "width": 473,
           "height": 262,
           "color": ""
         },
         "meta": {
-          "updateAt": 1740639984710,
+          "updateAt": 1740663148883,
           "createAt": 1739777993965
         }
       },
@@ -2534,6 +2535,22 @@
         "meta": {
           "updateAt": 1740638680334,
           "createAt": 1739778302402
+        }
+      },
+      "LPzsGuNn0i7h1XHI9htIv": {
+        "id": "LPzsGuNn0i7h1XHI9htIv",
+        "value": "",
+        "ui": {
+          "x": 1630.9279,
+          "y": 1179.3816,
+          "zIndex": 1204,
+          "width": 472,
+          "height": 443,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1740663155090,
+          "createAt": 1740660942988
         }
       }
     }
@@ -3158,7 +3175,7 @@
       1739777993964,
       -1,
       {
-        "value": 1739778276887
+        "value": 1740663148883
       }
     ],
     "l3Tzizi5aN3jMcXh6-5G7": [
@@ -3641,6 +3658,14 @@
       {
         "name": 1740640090789,
         "comment": 1740640082878
+      }
+    ],
+    "LPzsGuNn0i7h1XHI9htIv": [
+      "memoEntities",
+      1740660942987,
+      -1,
+      {
+        "value": 1740663155090
       }
     ]
   }
