@@ -51,10 +51,6 @@ export default function Home() {
         }
     };
 
-    const handleMyInfo = () => {
-        router.push("/user/me"); //클릭 시 `/user/me` 페이지로 이동
-    };
-
     const features = [
         { title: "대회 정보", text: "대회 정보 게시판 연결", path: "/competition/info" },
         { title: "회원 정보", text: "회원 정보 게시판 연결", path: "/user/list" },
@@ -66,19 +62,8 @@ export default function Home() {
             <Row className="align-items-center">
                 <Col md={6}>
                     <div>
-                        <h1 className="fw-bold">Marathoners 메인페이지</h1>
-                        <p className="text-muted">주요기술 : Next.Js, Spring-Boot, PostgreSql</p>
-                        {isLoggedIn ? (
-                            <>
-                                <div>
-                                    <p className="text-success">로그인 상태입니다.</p>
-                                    <Button className="btn btn-danger btn-sm me-2" variant="danger" onClick={handleLogout}>로그아웃</Button>
-                                    <Button className="btn btn-warning btn-sm" variant="warning" onClick={handleMyInfo}>내 정보 보기</Button>
-                                </div>
-                            </>
-                        ) : (
-                            <Button variant="primary" onClick={() => router.push('/auth/login')}>로그인</Button>
-                        )}
+                        <h1 className="fw-bold">Marathoners</h1>
+                        <p className="text-muted">러너들을 위한 대회 참고서</p>
                     </div>
                 </Col>
                 <Col md={6} className="text-center">
