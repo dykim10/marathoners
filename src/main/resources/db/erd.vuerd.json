@@ -4,9 +4,9 @@
   "settings": {
     "width": 3000,
     "height": 3000,
-    "scrollTop": -582,
-    "scrollLeft": -1799,
-    "zoomLevel": 0.97,
+    "scrollTop": 0,
+    "scrollLeft": -1800,
+    "zoomLevel": 1,
     "show": 431,
     "database": 16,
     "databaseName": "marathon",
@@ -52,9 +52,7 @@
       "HMhMnwu_hQ9gC8hUOrSUr"
     ],
     "memoIds": [
-      "k0MbhyvMJnCsRlKB-IOtb",
-      "ccFJCYQlu25qSi0wdL5j9",
-      "LPzsGuNn0i7h1XHI9htIv"
+      "ccFJCYQlu25qSi0wdL5j9"
     ]
   },
   "collections": {
@@ -271,7 +269,7 @@
           "color": "#FFFFFF"
         },
         "meta": {
-          "updateAt": 1740660940204,
+          "updateAt": 1740721312966,
           "createAt": 1739320957089
         }
       },
@@ -449,7 +447,7 @@
       },
       "FaJu_N3PvC2XAD3zid2JJ": {
         "id": "FaJu_N3PvC2XAD3zid2JJ",
-        "name": "tb_mr_qna",
+        "name": "tb_mr_eval_answer_detail",
         "comment": "대회별 평가 질문 답안 기록",
         "columnIds": [],
         "seqColumnIds": [],
@@ -457,12 +455,12 @@
           "x": 2415.464,
           "y": 534.0208,
           "zIndex": 1200,
-          "widthName": 60,
+          "widthName": 135,
           "widthComment": 147,
           "color": ""
         },
         "meta": {
-          "updateAt": 1740640090790,
+          "updateAt": 1740721348339,
           "createAt": 1740640005271
         }
       }
@@ -1971,20 +1969,20 @@
       "xla5kZ_ekR2iduSOPIP8L": {
         "id": "xla5kZ_ekR2iduSOPIP8L",
         "tableId": "m1mHlBQZtFx0ov-YRFdAO",
-        "name": "mr_etc",
+        "name": "mr_etc_memo",
         "comment": "대회 기타 정보",
         "dataType": "content",
         "default": "",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 76,
           "widthComment": 81,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1740631298655,
+          "updateAt": 1740724700767,
           "createAt": 1739840225591
         }
       },
@@ -2112,7 +2110,7 @@
         "id": "WFXtl4bBdhGK_7ZVlYIZL",
         "tableId": "qraa45FW58B3ygjH8niAv",
         "name": "mr_course_numeric",
-        "comment": "코스 제한인원",
+        "comment": "코스 모집인원",
         "dataType": "varchar(100)",
         "default": "",
         "options": 0,
@@ -2124,7 +2122,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1740639156740,
+          "updateAt": 1740727099206,
           "createAt": 1740631003305
         }
       },
@@ -2669,7 +2667,7 @@
       1739320957088,
       -1,
       {
-        "name": 1740639925201,
+        "name": 1740721312965,
         "comment": 1740639938713,
         "ui.color": 1739321042498
       }
@@ -3173,7 +3171,7 @@
     "k0MbhyvMJnCsRlKB-IOtb": [
       "memoEntities",
       1739777993964,
-      -1,
+      1740701502626,
       {
         "value": 1740663148883
       }
@@ -3428,7 +3426,7 @@
       1739840225591,
       -1,
       {
-        "name": 1740631294707,
+        "name": 1740724700766,
         "dataType": 1740631298654,
         "comment": 1739840252196
       }
@@ -3505,7 +3503,7 @@
         "name": 1740638263748,
         "dataType": 1740639156738,
         "default": 1740631003298,
-        "comment": 1740638311728
+        "comment": 1740727099205
       }
     ],
     "-Tt6sarjRhcqPsKk_6pOx": [
@@ -3656,14 +3654,14 @@
       1740640005267,
       -1,
       {
-        "name": 1740640090789,
+        "name": 1740721348338,
         "comment": 1740640082878
       }
     ],
     "LPzsGuNn0i7h1XHI9htIv": [
       "memoEntities",
       1740660942987,
-      -1,
+      1740701504290,
       {
         "value": 1740663155090
       }
