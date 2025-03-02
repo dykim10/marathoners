@@ -16,7 +16,7 @@ export default function UserListPage() {
 
     const fetchUsers = async () => {
         try {
-            const res = await fetch("/api/userlist", {
+            const res = await fetch("/api/race_list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

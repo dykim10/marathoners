@@ -52,7 +52,7 @@ export default function Home() {
     };
 
     const features = [
-        { title: "대회 정보", text: "대회 정보 게시판 연결", path: "/competition/info" },
+        { title: "대회 정보", text: "대회 정보 게시판 연결", path: "/race/list" },
         { title: "회원 정보", text: "회원 정보 게시판 연결", path: "/user/list" },
         { title: "Feature 3", text: "Explain the third feature concisely.", path: "/feature3" }
     ];

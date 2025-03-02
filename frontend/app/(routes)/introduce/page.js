@@ -17,7 +17,7 @@ export default function IntroducePage() {
                             </Card.Text>
                                 <div>
                                     <ul>
-                                        <li>Frontend: Next.js 15.1.7 (App Router 방식)</li>
+                                        <li>Frontend: Next.js 15.1.7 (App Router 방식) / react 19.0.0</li>
                                         <li>Backend: Spring Boot 3.4</li>
                                         <li>Database: PostgreSQL</li>
                                         <li>ORM: MyBatis + Lombok</li>

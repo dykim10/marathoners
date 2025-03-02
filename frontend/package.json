@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "next": "15.1.7",
