@@ -17,6 +17,9 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
         <result property="mrUseYn" column="mr_use_yn"/>
         <result property="mrEtcMemo" column="mr_etc_memo"/>
         <result property="mrHomepageUrl" column="mr_homepage_url"/>
+        <result property="mrRegDt" column="mr_reg_dt"/>
+        <result property="mrModDt" column="mr_mod_dt"/>
+        <result property="mrRegAdm" column="mr_reg_adm"/>
         <result column="rownum" property="rownum"/>
     </resultMap>
 
@@ -37,9 +40,9 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
 
     <!-- 공통 컬럼 -->
     <sql id="allColumns">
-        mr_uuid, mr_name, mr_start_dt, mr_location, mr_content, mr_company,
-    mr_reg_adm, mr_reg_dt, mr_mod_dt, mr_final_status, mr_use_yn,
-    mr_etc_memo, mr_homepage_url
+        mr_uuid, mr_name, mr_start_dt, mr_location, mr_content, mr_company
+        , mr_reg_adm, mr_reg_dt, mr_mod_dt, mr_final_status, mr_use_yn
+        , mr_etc_memo, mr_homepage_url
     </sql>
 
     <!-- 공통 WHERE 조건 -->
