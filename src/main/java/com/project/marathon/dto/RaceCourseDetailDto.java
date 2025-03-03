@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +14,7 @@ public class RaceCourseDetailDto {
     private int mrCoursePrice;              //코스가격
     private int mrCourseCapacity;           //모집인원
 
-    private String mrUuid;
+    private UUID mrUuid;
     private String mrCourseType;            //코스종류
     private String mrCourseTypeEtcText;     //기타코스
 }

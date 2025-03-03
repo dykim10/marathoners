@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { Button, Container, Card } from "react-bootstrap";
 
 export default function RaceDetailPage() {
     const { mrUuid } = useParams();
     const router = useRouter();
-    const { data: session } = useSession(); // 사용자 세션 확인
+//    const { data: session, status } = useSession(); // ✅ next-auth에서 세션 정보 가져오기
+
     const [race, setRace] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -62,11 +63,12 @@ export default function RaceDetailPage() {
                 </Button>
 
                 {/* 수정 버튼 (관리자만 표시) */}
-                {session?.user?.role === "admin" && (
+                {/*{session?.user?.role === "admin" && (*/}
+                {/*)}*/}
                     <Button variant="warning" onClick={() => router.push(`/race/edit/${mrUuid}`)}>
                         수정
                     </Button>
-                )}
+
             </div>
         </Container>
     );
