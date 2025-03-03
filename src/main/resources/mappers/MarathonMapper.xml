@@ -96,4 +96,16 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
         <include refid="filterConditions"/>
     </select>
 
+    <!-- 기본 대회 정보 조회 -->
+    <select id="getMarathonDetail" parameterType="String" resultMap="raceResultMap">
+        SELECT * FROM tb_marathon_race
+        WHERE mr_uuid = #{mrUuid}
+    </select>
+
+    <!-- 최신 코스 정보 조회 (mr_course_version 기준 최신순) -->
+    <select id="getLatestRaceCourses" parameterType="String" resultMap="raceCourseResultMap">
+        SELECT * FROM tb_marathon_course
+        WHERE mr_uuid = #{mrUuid}
+        ORDER BY mr_course_version DESC
+    </select>
 </mapper>

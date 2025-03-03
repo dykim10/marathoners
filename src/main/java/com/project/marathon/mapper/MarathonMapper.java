@@ -18,4 +18,8 @@ public interface MarathonMapper {
 
     List<MarathonResponseDto> getMarathonRaceList(MarathonRequestDto requestDto);
     int getMarathonRaceTotalCount(MarathonRequestDto requestDto);
+
+    MarathonResponseDto getMarathonDetail(String mrUuid);
+    List<RaceCourseDetailDto> getLatestRaceCourseList(String mrUuid);
+
 }

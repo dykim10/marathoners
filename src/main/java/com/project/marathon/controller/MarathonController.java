@@ -45,5 +45,18 @@ public class MarathonController {
         }
     }
 
+    /**
+     *
+     * @param mrUuid
+     * @return
+     */
+    @GetMapping("/detail/{mrUuid}")
+    public ResponseEntity<RaceResponseDto> getRaceDetail(@PathVariable String mrUuid) {
+        RaceResponseDto raceDetail = marathonService.getMarathonDetailWithCourses(mrUuid);
 
+        if (raceDetail.getRaceInfo() == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(raceDetail);
+    }
 }

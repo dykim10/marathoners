@@ -2,6 +2,7 @@ package com.project.marathon.service;
 
 import com.project.marathon.dto.MarathonRequestDto;
 import com.project.marathon.dto.MarathonResponseDto;
+import com.project.marathon.dto.RaceCourseDetailDto;
 import com.project.marathon.dto.RaceResponseDto;
 import com.project.marathon.mapper.MarathonMapper;
 import lombok.RequiredArgsConstructor;
@@ -111,6 +112,20 @@ public class MarathonService {
             //예외 발생 시 전체 트랜잭션 롤백
             throw new RuntimeException("마라톤 등록 중 오류 발생: " + e.getMessage(), e);
         }
+    }
+
+    public RaceResponseDto getMarathonDetailWithCourses(String mrUuid) {
+
+        // 기본 대회 정보 가져오기
+        MarathonResponseDto raceInfo = marathonMapper.getMarathonDetail(mrUuid);
+
+        // 최신 코스 정보 리스트 가져오기 (mr_course_version 기준 최신순)
+        List<RaceCourseDetailDto> raceCourseList = marathonMapper.getLatestRaceCourseList(mrUuid);
+
+        RaceResponseDto resDto = new RaceResponseDto();
+        resDto.setRaceInfo(raceInfo);
+        resDto.setRaceCourseDetailList(raceCourseList);
+        return resDto;
     }
 
 }

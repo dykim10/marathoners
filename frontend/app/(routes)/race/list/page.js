@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Table, Form, Button, Pagination, Dropdown, InputGroup } from "react-bootstrap";
 
 export default function RaceListPage() {
+    const router = useRouter();
+
     const [races, setRaces] = useState([]);
     const [keyword, setKeyword] = useState("");
     const [year, setYear] = useState(""); // 기본 연도 (현재 연도) ==> 입력 new Date().getFullYear()
@@ -124,7 +127,11 @@ export default function RaceListPage() {
 
                 {races.length > 0 ? (
                     races.map((race, index) => (
-                        <tr key={race.mrUuid}>
+                        <tr
+                            key={race.mrUuid}
+                            style={{cursor: "pointer"}}
+                            onClick={() => router.push(`/race/view/${race.mrUuid}`)}
+                        >
                             <td>{(page - 1) * rows + index + 1}</td>
                             <td>{race.mrName}</td>
                             <td>{new Date(race.mrStartDt).toLocaleDateString()}</td>

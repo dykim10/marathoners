@@ -12,4 +12,6 @@ public class RaceResponseDto {
     private int currentPage; // 현재 페이지 번호
     private int rowsPerPage; // 한 페이지에 표시할 개수
 
+    private MarathonResponseDto raceInfo; // 기본 대회 정보
+    private List<RaceCourseDetailDto> raceCourseDetailList;
 }
