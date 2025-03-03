@@ -90,7 +90,7 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
     </select>
 
     <!-- 데이터 개수 조회 (COUNT(*) 활용) -->
-    <select id="getRaceCount" resultType="int">
+    <select id="getMarathonRaceTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM tb_marathon_race
         <include refid="filterConditions"/>

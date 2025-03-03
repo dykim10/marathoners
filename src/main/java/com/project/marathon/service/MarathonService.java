@@ -71,10 +71,15 @@ public class MarathonService {
         // 새로운 RaceResponseDto 객체 생성
         RaceResponseDto raceResponseDto = new RaceResponseDto();
         List<MarathonResponseDto> datalist = marathonMapper.getMarathonRaceList(requestDto);
+        int totalRows = marathonMapper.getMarathonRaceTotalCount(requestDto); // 전체 데이터 개수 조회
+
+        // 총 페이지 수 계산
+        int totalPages = (int) Math.ceil((double) totalRows / requestDto.getRows());
 
         // MarathonResponseDto 리스트를 RaceResponseDto에 할당
         raceResponseDto.setRaceList(datalist);
-        //raceResponseDto.setTotalRows(marathonMapper.getTotalRows());
+        raceResponseDto.setTotalRows(totalRows);
+        raceResponseDto.setTotalPages(totalPages);
 
         // Controller로 반환 (ResponseEntity 사용 X)
         return raceResponseDto;

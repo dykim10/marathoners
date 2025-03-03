@@ -35,7 +35,7 @@ export default function RaceListPage() {
 
             const data = await res.json();
             setRaces(data.raceList || []); // undefined 방지
-            setTotalPages(data.totalRows);
+            setTotalPages(data.totalPages || 1);
         } catch (error) {
             console.error("Error fetching races:", error);
             setError(error);
@@ -95,6 +95,19 @@ export default function RaceListPage() {
                 <Button variant="primary" size="sm" onClick={fetchRaces}> 검색 </Button>
             </InputGroup>
 
+            <Dropdown className="mb-3">
+                <Dropdown.Toggle variant="secondary" size="sm">
+                    목록 개수: {rows}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {[5, 10, 20, 50].map((num) => (
+                        <Dropdown.Item key={num} onClick={() => setRows(num)}>
+                            {num}
+                        </Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+            </Dropdown>
+
             {/* 대회 일정 테이블 */}
             <Table striped bordered hover>
                 <thead>
@@ -112,7 +125,7 @@ export default function RaceListPage() {
                 {races.length > 0 ? (
                     races.map((race, index) => (
                         <tr key={race.mrUuid}>
-                            <td>{race.rownum}</td>
+                            <td>{(page - 1) * rows + index + 1}</td>
                             <td>{race.mrName}</td>
                             <td>{new Date(race.mrStartDt).toLocaleDateString()}</td>
                             <td>{race.mrLocation}</td>

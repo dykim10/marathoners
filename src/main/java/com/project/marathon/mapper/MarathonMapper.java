@@ -17,5 +17,5 @@ public interface MarathonMapper {
     void insertMarathonCourse(String mrUuid, @Param("raceCourseDetails") List<RaceCourseDetailDto> raceCourseDetails);
 
     List<MarathonResponseDto> getMarathonRaceList(MarathonRequestDto requestDto);
-    int totalRows(MarathonRequestDto requestDto);
+    int getMarathonRaceTotalCount(MarathonRequestDto requestDto);
 }
