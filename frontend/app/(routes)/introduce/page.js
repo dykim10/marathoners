@@ -36,17 +36,17 @@ export default function IntroducePage() {
                         <Card.Body>
                             <Card.Title className="fw-bold">사이트 개발 목표</Card.Title>
                             <Card.Text>
-                                이 사이트는 마라톤 대회의 관련 정보를 제공하고,
-                                참가자들이 쉽게 정보를 얻을 수 있도록 하고자 합니다.
-                                특히, 참가자들이 남긴 리뷰를 빅데이터화 한다.
+                                이 사이트는 마라톤 대회의 관련 정보를 제공하고, 참가자들이 쉽게 정보를 얻을 수 있도록 하고자 합니다.<br />
+                                특히, <span className="text-decoration-underline">
+                                        대회 참가자들이 남긴 리뷰를 빅데이터화하여 <span className="font-semibold">참여하고자 하는 대회에 대하여 데이터</span> 를 제공
+                                </span>한다.
                             </Card.Text>
                                 <div>
                                     <ul>
-                                        <li>사용자 친화적인 UI/UX</li>
-                                        <li>빠르고 안정적인 서비스 제공</li>
-                                        <li>효율적인 데이터 관리 및 검색 기능</li>
-                                        <li>마라톤 일정 및 기록 관리 시스템 구축</li>
-                                        <li>참가자 커뮤니티 기능 추가</li>
+                                        <li>회원가입 및 로그인 기능 개발 완료.</li>
+                                        <li>마라톤 일정 및 기록 관리 시스템 구축 개발 진행 중.</li>
+                                        <li>마라톤 대회 리뷰 시스템 구축 예정</li>
+                                        <li>참가자 커뮤니티 기능 구축 예정</li>
                                     </ul>
                                 </div>
                         </Card.Body>

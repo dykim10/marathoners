@@ -1,16 +1,17 @@
 package com.project.marathon.controller;
 
 import com.project.marathon.dto.MarathonDataResponse;
+import com.project.marathon.dto.MarathonRequestDto;
+import com.project.marathon.dto.MarathonResponseDto;
 import com.project.marathon.service.MarathonService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/marathon")
 public class MarathonController {
     private final MarathonService marathonService;
 
@@ -18,17 +19,12 @@ public class MarathonController {
         this.marathonService = marathonService;
     }
 
-    @GetMapping("/marathon/fetch")
-    public String fetchMarathonData() {
-        marathonService.fetchAndPrintMarathonData();
-        return "Data fetched and printed in console";
-    }
 
     /**
      * DB 대회 리스트 전달.
      * @return
      */
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<MarathonDataResponse>> getMarathonList() {
         List<MarathonDataResponse> marathonData = marathonService.getMarathonDataList();
 
@@ -39,4 +35,17 @@ public class MarathonController {
         return ResponseEntity.ok(marathonData); // 정상 데이터 반환 (HTTP 200)
     }
 
+    /**
+     * DB 대회 등록 후 전달.
+     * @return
+     */
+    @PostMapping("/register")
+    public ResponseEntity<?> registerMarathon(@RequestBody MarathonRequestDto requestDto) {
+        try {
+            MarathonResponseDto response = marathonService.registerMarathon(requestDto);
+            return ResponseEntity.ok(response); // ✅ HTTP 200 + MarathonResponseDto 응답
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("등록 실패: " + e.getMessage());
+        }
+    }
 }

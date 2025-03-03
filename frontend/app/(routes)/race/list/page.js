@@ -42,7 +42,7 @@ export default function UserListPage() {
 
     return (
         <div className="container mt-4">
-            <h2>회원 리스트</h2>
+            <h2>대회 일정</h2>
             <Form className="mb-3">
                 <Form.Control
                     type="text"
@@ -57,7 +57,7 @@ export default function UserListPage() {
                     목록 개수: {rows}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    {[10, 20, 50].map((num) => (
+                    {[5, 10, 20, 50].map((num) => (
                         <Dropdown.Item key={num} onClick={() => setRows(num)}>
                             {num}
                         </Dropdown.Item>
@@ -68,10 +68,12 @@ export default function UserListPage() {
             <Table striped bordered hover>
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>이름</th>
-                    <th>이메일</th>
-                    <th>가입일</th>
+                    <th>No</th>
+                    <th>대회명</th>
+                    <th>대회주최</th>
+                    <th>대회일</th>
+                    <th>대회코스</th>
+                    <th>대회평점</th>
                 </tr>
                 </thead>
                 <tbody>

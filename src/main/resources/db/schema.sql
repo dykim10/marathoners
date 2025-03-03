@@ -66,7 +66,7 @@ COMMENT ON COLUMN tb_marathon_course.mr_uuid IS '대회 코드 uuid';
 COMMENT ON COLUMN tb_marathon_course.mr_course_version IS '코스 생성 버전';
 COMMENT ON COLUMN tb_marathon_course.mr_course_type IS '코스 종류';
 COMMENT ON COLUMN tb_marathon_course.mr_course_type_etc_text IS '코스 기타 입력';
-COMMENT ON COLUMN tb_marathon_course.mr_course_numeric IS '코스 모집인원';
+COMMENT ON COLUMN tb_marathon_course.mr_course_capacity IS '코스 모집인원';
 COMMENT ON COLUMN tb_marathon_course.mr_course_price IS '코스 금액';
 COMMENT ON COLUMN tb_marathon_course.mr_course_reg_dt IS '생성일';
 

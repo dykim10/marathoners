@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.marathon.mapper.MarathonMapper">
+
+    <!-- tb_marathon_race에 데이터 삽입 후 UUID 반환 -->
+    <insert id="insertMarathonRace" parameterType="MarathonRequestDto" useGeneratedKeys="true" keyProperty="mrUuid">
+        INSERT INTO tb_marathon_race (mr_uuid, mr_name, mr_start_dt, mr_location, mr_company, mr_content, mr_homepage_url)
+        VALUES (#{mrUuid, typeHandler=com.project.marathon.config.UUIDTypeHandler}, #{mrName}, #{mrStartDt}, #{mrLocation}, #{mrCompany}, #{mrContent}, #{mrHomepageUrl})
+    </insert>
+
+    <!-- tb_marathon_course에 다중 INSERT (foreach 사용) -->
+    <insert id="insertMarathonCourse" parameterType="MarathonRequestDto">
+        INSERT INTO tb_marathon_course (mr_uuid, mr_course_type, mr_course_price, mr_course_capacity, mr_course_type_etc_text)
+        VALUES
+        <foreach collection="raceCourseDetails" item="detail" separator=",">
+            (#{mrUuid, jdbcType=VARCHAR}, #{detail.mrCourseType}, #{detail.mrCoursePrice}, #{detail.mrCourseCapacity}, #{detail.mrCourseTypeEtcText})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -3,32 +3,42 @@ package com.project.marathon.service;
 import com.project.marathon.dto.MarathonApiResponse;
 import com.project.marathon.dto.MarathonDataResponse;
 
+import com.project.marathon.dto.MarathonRequestDto;
+import com.project.marathon.dto.MarathonResponseDto;
+import com.project.marathon.mapper.MarathonMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
+
 public class MarathonService {
     private static final Logger logger = LoggerFactory.getLogger(MarathonService.class);
     private final WebClient webClient;
+    private final MarathonMapper marathonMapper;
 
-    @Value("${public.api.service-key}")
+        @Value("${public.api.service-key}")
     private String serviceKey;
 
     private static final String BASE_URL = "https://api.odcloud.kr/api/15138980/v1/uddi:eedc77c5-a56b-4e77-9c1d-9396fa9cc1d3";
     //https://api.odcloud.kr/api/15138980/v1/uddi:eedc77c5-a56b-4e77-9c1d-9396fa9cc1d3?serviceKey=Zcfv%2Fo8xqsCuuPEht%2FsTuNPf0GJK43LLyi2fGmOagiVXG2Xl%2BEVTzhkuOhQvngART1BeBn7bVhCZROt3iR44bQ%3D%3D&otherParam=value&page=1&perPage=100
     // WebClient.Builder를 주입받아 사용
     @Autowired
-    public MarathonService(WebClient.Builder webClientBuilder) {
+    public MarathonService(WebClient.Builder webClientBuilder, MarathonMapper marathonMapper) {
         this.webClient = webClientBuilder.baseUrl(BASE_URL).build();
+        this.marathonMapper = marathonMapper;
     }
 
     public void fetchAndPrintMarathonData() {
@@ -71,6 +81,34 @@ public class MarathonService {
 //        marathonDataResponseList.add(new MarathonDataResponse("부산 국제 마라톤", "부산", "2025-05-20", "부산육상연맹"));
 
         return marathonDataResponseList; // ResponseEntity 사용 X
+    }
+
+    public MarathonResponseDto registerMarathon(MarathonRequestDto requestDto) {
+        try {
+            // UUID 자동 생성;
+            requestDto.setMrUuid(UUID.randomUUID());
+
+            // tb_marathon_race 테이블에 1행 INSERT
+            int result = marathonMapper.insertMarathonRace(requestDto);
+            if (result <= 0) {
+                throw new RuntimeException("❌ tb_marathon_race INSERT 실패!");
+            }
+
+            // tb_marathon_course 테이블에 raceDetail 데이터 INSERT
+            if (requestDto.getRaceCourseDetails() != null && !requestDto.getRaceCourseDetails().isEmpty()) {
+                marathonMapper.insertMarathonCourse(requestDto.getMrUuid().toString(), requestDto.getRaceCourseDetails());
+                log.info("✅ tb_marathon_course INSERT 성공!");
+            }
+
+            MarathonResponseDto res = new MarathonResponseDto();
+            res.setMrUuid(requestDto.getMrUuid().toString());
+
+            return res;
+
+        } catch (Exception e) {
+            //예외 발생 시 전체 트랜잭션 롤백
+            throw new RuntimeException("마라톤 등록 중 오류 발생: " + e.getMessage(), e);
+        }
     }
 
 }

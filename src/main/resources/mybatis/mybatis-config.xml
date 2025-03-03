@@ -13,5 +13,6 @@
     <mappers>
         <mapper resource="mappers/MessageMapper.xml"/>
         <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/MarathonMapper.xml"/>
     </mappers>
 </configuration>
