@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@EqualsAndHashCode(callSuper = true) // 부모 클래스 필드까지 포함
-@Alias("MarathonDataResponse") // MyBatis에서 'UserResponse'라는 별칭으로 사용
+
+
 public class MarathonDataResponse extends Marathon {
 
 

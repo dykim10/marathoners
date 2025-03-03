@@ -1,8 +1,8 @@
 package com.project.marathon.controller;
 
-import com.project.marathon.dto.MarathonDataResponse;
 import com.project.marathon.dto.MarathonRequestDto;
 import com.project.marathon.dto.MarathonResponseDto;
+import com.project.marathon.dto.RaceResponseDto;
 import com.project.marathon.service.MarathonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +24,11 @@ public class MarathonController {
      * DB 대회 리스트 전달.
      * @return
      */
-    @GetMapping("/list")
-    public ResponseEntity<List<MarathonDataResponse>> getMarathonList() {
-        List<MarathonDataResponse> marathonData = marathonService.getMarathonDataList();
+    @PostMapping("/list")
+    public ResponseEntity<?> getMarathonList(@RequestBody MarathonRequestDto requestDto) {
 
-        if (marathonData.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 데이터가 없을 경우 204 응답
-        }
-
-        return ResponseEntity.ok(marathonData); // 정상 데이터 반환 (HTTP 200)
+        RaceResponseDto raceResponseDto = marathonService.getMarathonDataList(requestDto);
+        return ResponseEntity.ok(raceResponseDto); // 정상 데이터 반환 (HTTP 200)
     }
 
     /**
@@ -48,4 +44,6 @@ public class MarathonController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("등록 실패: " + e.getMessage());
         }
     }
+
+
 }

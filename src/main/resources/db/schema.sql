@@ -99,3 +99,7 @@ COMMENT ON COLUMN tb_marathon_race.mr_final_status IS '대회 종료 전N/후Y �
 COMMENT ON COLUMN tb_marathon_race.mr_use_yn IS '대회 활성화 여부';
 COMMENT ON COLUMN tb_marathon_race.mr_etc_memo IS '대회 기타 정보';
 COMMENT ON COLUMN tb_marathon_race.mr_homepage_url IS '대회 홈페이지 URL';
+
+CREATE INDEX idx_marathon_race_start_date ON tb_marathon_race(mr_start_dt);
+CREATE INDEX idx_marathon_race_reg_date ON tb_marathon_race(mr_reg_dt);
+CREATE INDEX idx_marathon_race_name ON tb_marathon_race(mr_name);

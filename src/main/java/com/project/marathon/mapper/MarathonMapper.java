@@ -1,6 +1,7 @@
 package com.project.marathon.mapper;
 
 import com.project.marathon.dto.MarathonRequestDto;
+import com.project.marathon.dto.MarathonResponseDto;
 import com.project.marathon.dto.RaceCourseDetailDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,4 +15,7 @@ public interface MarathonMapper {
 
     //tb_marathon_course에 raceDetail 데이터 INSERT
     void insertMarathonCourse(String mrUuid, @Param("raceCourseDetails") List<RaceCourseDetailDto> raceCourseDetails);
+
+    List<MarathonResponseDto> getMarathonRaceList(MarathonRequestDto requestDto);
+    int totalRows(MarathonRequestDto requestDto);
 }

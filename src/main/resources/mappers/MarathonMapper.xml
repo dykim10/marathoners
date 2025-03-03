@@ -1,7 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--
+MyBatis XML 내에서 mapper 태그의 올바른 순서
+(cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+
+-->
 <mapper namespace="com.project.marathon.mapper.MarathonMapper">
+    <resultMap id="raceResultMap" type="com.project.marathon.dto.MarathonResponseDto">
+        <id property="mrUuid" column="mr_uuid" jdbcType="VARCHAR" typeHandler="com.project.marathon.config.UUIDTypeHandler"/>
+        <result property="mrName" column="mr_name"/>
+        <result property="mrStartDt" column="mr_start_dt"/>
+        <result property="mrLocation" column="mr_location"/>
+        <result property="mrContent" column="mr_content"/>
+        <result property="mrCompany" column="mr_company"/>
+        <result property="mrFinalStatus" column="mr_final_status"/>
+        <result property="mrUseYn" column="mr_use_yn"/>
+        <result property="mrEtcMemo" column="mr_etc_memo"/>
+        <result property="mrHomepageUrl" column="mr_homepage_url"/>
+        <result column="rownum" property="rownum"/>
+    </resultMap>
+
+    <resultMap id="raceCourseResultMap" type="com.project.marathon.dto.RaceCourseDetailDto">
+        <id property="mrUuid" column="mr_uuid" jdbcType="VARCHAR" typeHandler="com.project.marathon.config.UUIDTypeHandler"/>
+        <result property="mrCourseVersion" column="mr_course_version"/>
+        <result property="mrCourseType" column="mr_course_type"/>
+        <result property="mrCourseTypeEtcText" column="mr_course_type_etc_text"/>
+        <result property="mrCourseCapacity" column="mr_course_capacity"/>
+        <result property="mrCourse{rice" column="mr_course_price"/>
+    </resultMap>
+
+
+    <!-- 공통 시작 부분 (SELECT *, ROW_NUMBER() 적용) -->
+    <sql id="common-start">
+        SELECT *, ROW_NUMBER() OVER (ORDER BY mr_reg_dt DESC) AS rownum FROM (
+    </sql>
+
+    <!-- 공통 컬럼 -->
+    <sql id="allColumns">
+        mr_uuid, mr_name, mr_start_dt, mr_location, mr_content, mr_company,
+    mr_reg_adm, mr_reg_dt, mr_mod_dt, mr_final_status, mr_use_yn,
+    mr_etc_memo, mr_homepage_url
+    </sql>
+
+    <!-- 공통 WHERE 조건 -->
+    <sql id="filterConditions">
+        <where>
+            <if test="year != null and year != ''">
+                <![CDATA[mr_start_dt >= CAST(#{year} || '-01-01' AS DATE)
+                    AND mr_start_dt <= CAST(#{year} || '-12-31' AS DATE)]]>
+            </if>
+        </where>
+    </sql>
+
+    <!-- 내부 서브쿼리 (전체 리스트 조회) -->
+    <sql id="baseQuery">
+        SELECT <include refid="allColumns"/>
+        FROM tb_marathon_race
+        <include refid="filterConditions"/>
+        ORDER BY mr_reg_dt DESC
+    </sql>
+
+    <!-- 공통 종료 부분 (페이징 적용) -->
+    <sql id="common-end">
+        LIMIT #{rows} OFFSET #{offset}
+        ) AS numbered_rows
+        ORDER BY rownum DESC
+    </sql>
 
     <!-- tb_marathon_race에 데이터 삽입 후 UUID 반환 -->
     <insert id="insertMarathonRace" parameterType="MarathonRequestDto" useGeneratedKeys="true" keyProperty="mrUuid">
@@ -17,5 +81,19 @@
             (#{mrUuid, jdbcType=VARCHAR}, #{detail.mrCourseType}, #{detail.mrCoursePrice}, #{detail.mrCourseCapacity}, #{detail.mrCourseTypeEtcText})
         </foreach>
     </insert>
+
+    <!-- 최종 SELECT 문 (공통 SQL 포함) -->
+    <select id="getMarathonRaceList" parameterType="MarathonRequestDto" resultMap="raceResultMap">
+        <include refid="common-start"/>
+        <include refid="baseQuery"/>
+        <include refid="common-end"/>
+    </select>
+
+    <!-- 데이터 개수 조회 (COUNT(*) 활용) -->
+    <select id="getRaceCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_marathon_race
+        <include refid="filterConditions"/>
+    </select>
 
 </mapper>

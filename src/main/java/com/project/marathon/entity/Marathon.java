@@ -3,6 +3,7 @@ package com.project.marathon.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -13,7 +14,7 @@ public class Marathon {
     // 대회명
     private String mrName;
     // 대회일자 YYYY-MM-DD
-    private String mrStartDate;
+    private LocalDate mrStartDt;
     // 대회 장소
     private String mrLocation;
     // 대회 소개-설명-안내
