@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata = {
     title: "Marathoners ",
-    description: "Next.js와 Spring Boot를 연결하여 공부 및 서비스를 목표로 하는 프로젝트",
+    description: "Next.js와 Spring Boot를 연결하여 공부, 스터디, 개인 과제 목표로 하는 프로젝트",
 };
 
 export default function RootLayout({ children }) {
