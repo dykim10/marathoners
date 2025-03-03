@@ -2,9 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css"; // Toast UI Editor 기본 스타일
-import "@toast-ui/editor/dist/theme/toastui-editor-dark.css"; // 다크 테마 지원
+import dynamic from "next/dynamic";
+import "react-datepicker/dist/react-datepicker.css";
+
+const DatePicker = dynamic(() => import("react-datepicker").then((mod) => mod.default), { ssr: false });
 
 export const RACE_TYPES = [
     { key: "WALK_COURSE", label: "걷기" },
@@ -20,26 +21,39 @@ export const RACE_TYPES = [
 export default function MarathonRegister({ initialData = null }) {
     const [formData, setFormData] = useState({
         mrName: initialData?.mrName || "",
-        mrStartDt: initialData?.mrStartDt || "",
+        mrStartDt: initialData?.mrStartDt ? new Date(initialData.mrStartDt) : new Date(),
         mrLocation: initialData?.mrLocation || "",
         mrCompany: initialData?.mrCompany || "",
         mrContent: initialData?.mrContent || "",
-        mrHomepageUrl: initialData?.mrHompageUrl || "",
-
-        //대회의 코스 디테일설정
+        mrHomepageUrl: initialData?.mrHomepageUrl || "",
         selectedRaceTypes: initialData?.selectedRaceTypes || [],
-        raceDetails: initialData?.raceDetails || {}, // { 유형: { price: "", capacity: "", etc: "" } }
+        raceDetails: initialData?.raceDetails || {},
     });
 
-    const editorRef = useRef(null);
+    // ✅ 날짜 선택 핸들러
+    const handleDateChange = (date) => {
+        setFormData((prev) => ({ ...prev, mrStartDt: date }));
+    };
 
-    useEffect(() => {
-        if (initialData && editorRef.current) {
-            editorRef.current.getInstance().setMarkdown(initialData.description || "");
-        }
-    }, [initialData]);
+    // ✅ 대회 유형 체크박스 변경 핸들러 (다중 선택 유지)
+    const handleRaceTypeChange = (key) => {
+        setFormData((prev) => {
+            const updatedRaceTypes = prev.selectedRaceTypes.includes(key)
+                ? prev.selectedRaceTypes.filter((type) => type !== key)
+                : [...prev.selectedRaceTypes, key];
 
-    // 입력 필드 값 변경 처리
+            return {
+                ...prev,
+                selectedRaceTypes: updatedRaceTypes,
+                raceDetails: {
+                    ...prev.raceDetails,
+                    [key]: prev.raceDetails[key] || { price: "", capacity: "", etc: "" },
+                },
+            };
+        });
+    };
+
+    // ✅ 입력 필드 값 변경 핸들러
     const handleInputChange = (key, field, value) => {
         setFormData((prev) => ({
             ...prev,
@@ -50,51 +64,16 @@ export default function MarathonRegister({ initialData = null }) {
         }));
     };
 
-    // 에디터 내용 변경 시 formData에 저장
-    const handleEditorChange = () => {
-        const editorInstance = editorRef.current.getInstance();
-        const content = editorInstance.getMarkdown();
-        setFormData((prev) => ({ ...prev, description: content }));
-    };
-
-    // 대회 코스 유형 체크박스 선택/해제 처리
-    const handleRaceTypeChange = (key) => {
-        setFormData((prev) => {
-            const updatedRaceTypes = prev.selectedRaceTypes.includes(key)
-                ? prev.selectedRaceTypes.filter((type) => type !== key)
-                : [...prev.selectedRaceTypes, key];
-
-            const updatedRaceDetails = { ...prev.raceDetails };
-
-            // 선택 해제 시 해당 유형의 입력 필드 값 초기화
-            if (!updatedRaceTypes.includes(key)) {
-                delete updatedRaceDetails[key];
-            } else {
-                updatedRaceDetails[key] = { price: "", capacity: "", etc: "" };
-            }
-
-            return { ...prev, selectedRaceTypes: updatedRaceTypes, raceDetails: updatedRaceDetails };
-        });
-    };
-
+    // ✅ 제출 핸들러
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // 에디터 내용 가져오기
-        const description = editorRef.current.getInstance().getMarkdown();
-
-        // 필수값 검증
         if (!formData.mrName.trim()) return alert("대회명을 입력하세요.");
         if (!formData.mrStartDt) return alert("날짜를 선택하세요.");
         if (!formData.mrLocation.trim()) return alert("위치를 입력하세요.");
         if (!formData.mrContent.trim()) return alert("대회 설명을 입력하세요.");
-        //if (!formData.mrHomepageUrl.trim()) return alert("홈페이지를 입력하세요.");
-        //if (!formData.mrCompany.trim()) return alert("주최/주관사를 입력하세요.");
-
         if (formData.selectedRaceTypes.length === 0) return alert("대회 유형을 하나 이상 선택하세요.");
-        const payload = { ...formData, description };
 
-        console.log("🚀 제출 데이터:", payload);
+        console.log("제출 데이터:", formData);
         // TODO: API 요청 로직 추가
     };
 
@@ -102,108 +81,77 @@ export default function MarathonRegister({ initialData = null }) {
         <Container className="mt-5">
             <Row className="justify-content-md-center">
                 <Col md={8}>
-                    <h2 className="text-center">🏃‍♂️ 마라톤 대회 {initialData ? "수정" : "등록"}</h2>
+                    <h2 className="text-center">대회 등록</h2>
                     <Form onSubmit={handleSubmit}>
-                        {/* 대회명 입력 */}
+                        {/* 대회명 */}
                         <Form.Group className="mb-3">
                             <Form.Label>대회명</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="대회명을 입력하세요"
-                                name="raceName"
-                                value={formData.mrRaceName}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <Form.Control type="text" value={formData.mrName} onChange={(e) => setFormData({ ...formData, mrName: e.target.value })} required />
                         </Form.Group>
 
-                        {/* 날짜 선택 */}
+                        {/* 대회 날짜 */}
                         <Form.Group className="mb-3">
-                            <Form.Label>대회날짜</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="startDate"
-                                value={formData.mrStartDt}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <Row className="align-items-center">
+                                <Col xs="auto">
+                                    <Form.Label className="m-0">대회 날짜</Form.Label>
+                                </Col>
+                                <Col>
+                                    <DatePicker selected={formData.mrStartDt} onChange={handleDateChange} dateFormat="yyyy-MM-dd" className="form-control" />
+                                </Col>
+                            </Row>
                         </Form.Group>
 
-                        {/* 위치 입력 */}
+                        {/* 대회 장소   */}
                         <Form.Group className="mb-3">
-                            <Form.Label>위치</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="위치를 입력하세요"
-                                name="location"
-                                value={formData.location}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <Form.Label>대회 장소</Form.Label>
+                            <Form.Control type="text" value={formData.mrLocation} onChange={(e) => setFormData({ ...formData, mrLocation: e.target.value })} required />
                         </Form.Group>
 
-                        {/* 선택된 대회 유형별 입력 필드 */}
-                        {formData.selectedRaceTypes.map((key) => (
-                            <div key={key} className="mb-3 p-3 border rounded bg-light">
-                                <h5>{RACE_TYPES.find((r) => r.key === key)?.label} 설정</h5>
-                                <Form.Group className="mb-2">
-                                    <Form.Label>가격</Form.Label>
-                                    <Form.Control type="number" value={formData.raceDetails[key]?.price || ""} onChange={(e) => handleInputChange(key, "price", e.target.value)} placeholder="가격 입력" />
-                                </Form.Group>
-
-                                <Form.Group className="mb-2">
-                                    <Form.Label>모집 인원</Form.Label>
-                                    <Form.Control type="number" value={formData.raceDetails[key]?.capacity || ""} onChange={(e) => handleInputChange(key, "capacity", e.target.value)} placeholder="모집 인원 입력" />
-                                </Form.Group>
-
-                                {/* "기타" 선택 시만 표시 */}
-                                {key === "ETC_COURSE" && (
-                                    <Form.Group className="mb-2">
-                                        <Form.Label>기타 내용</Form.Label>
-                                        <Form.Control type="text" value={formData.raceDetails[key]?.etc || ""} onChange={(e) => handleInputChange(key, "etc", e.target.value)} placeholder="기타 내용을 입력하세요" />
-                                    </Form.Group>
-                                )}
-                            </div>
-                        ))}
-
-                        {/* 주관사 입력 */}
+                        {/* 대회 주관사   */}
                         <Form.Group className="mb-3">
-                            <Form.Label>주최</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="주관사를 입력하세요"
-                                name="mr_company"
-                                value={formData.mrCompany}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <Form.Label>대회 주관사</Form.Label>
+                            <Form.Control type="text" value={formData.mrCompany} onChange={(e) => setFormData({ ...formData, mrCompany: e.target.value })} required />
                         </Form.Group>
 
-                        {/* 홈페이지 입력 */}
+                        {/* 대회 홈페이지   */}
                         <Form.Group className="mb-3">
-                            <Form.Label>위치</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="URL 입력하세요"
-                                name="mrHomepageUrl"
-                                value={formData.mrHomepageUrl}
-                                onChange={handleInputChange}
-                            />
+                            <Form.Label>대회 홈페이지</Form.Label>
+                            <Form.Control type="text" value={formData.mrHomepageUrl} onChange={(e) => setFormData({ ...formData, mrHomepageUrl: e.target.value })} required />
                         </Form.Group>
                         
+                        {/* 대회 유형 선택 (체크박스 + 입력 필드 한 줄 배치) */}
+                        <Form.Group className="mb-3">
+                            <Form.Label>대회 유형</Form.Label>
+                            {RACE_TYPES.map(({ key, label }) => (
+                                <Row key={key} className="align-items-center mb-2">
+                                    <Col xs="auto">
+                                        <Form.Check type="checkbox" label={label} checked={formData.selectedRaceTypes.includes(key)} onChange={() => handleRaceTypeChange(key)} />
+                                    </Col>
+                                    {formData.selectedRaceTypes.includes(key) && (
+                                        <>
+                                            <Col>
+                                                <Form.Control type="number" placeholder="가격" value={formData.raceDetails[key]?.price || ""} onChange={(e) => handleInputChange(key, "price", e.target.value)} />
+                                            </Col>
+                                            <Col>
+                                                <Form.Control type="number" placeholder="모집 인원" value={formData.raceDetails[key]?.capacity || ""} onChange={(e) => handleInputChange(key, "capacity", e.target.value)} />
+                                            </Col>
+                                            {key === "ETC_COURSE" && (
+                                                <Col>
+                                                    <Form.Control type="text" placeholder="기타 내용" value={formData.raceDetails[key]?.etc || ""} onChange={(e) => handleInputChange(key, "etc", e.target.value)} />
+                                                </Col>
+                                            )}
+                                        </>
+                                    )}
+                                </Row>
+                            ))}
+                        </Form.Group>
+
                         {/* 설명 입력 (Toast UI Editor) */}
                         <Form.Group className="mb-3">
                             <Form.Label>대회 설명</Form.Label>
-                            <Editor previewStyle="vertical"
-                                    height="300px"
-                                    initialEditType="wysiwyg"
-                                    useCommandShortcut={true}
-                                    theme="dark"
-                                    ref={editorRef}
-                                    onChange={handleEditorChange} />
+                            <Form.Control as="textarea" rows={5} value={formData.mrContent} onChange={(e) => setFormData({ ...formData, mrContent: e.target.value })} required />
                         </Form.Group>
 
-                        {/* 등록 또는 수정 버튼 */}
                         <Button variant="primary" type="submit" className="w-100">
                             {initialData ? "수정하기" : "등록하기"}
                         </Button>
