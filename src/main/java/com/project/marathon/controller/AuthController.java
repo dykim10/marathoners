@@ -45,7 +45,7 @@ public class AuthController {
 
     //session 확인
     @GetMapping("/session")
-    public ResponseEntity<Map<String, Object>> getSession(HttpServletRequest request) {
+    public ResponseEntity<?> getSession(HttpServletRequest request) {
         return authService.getSession(request);
     }
 

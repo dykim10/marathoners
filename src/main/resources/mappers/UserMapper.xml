@@ -12,6 +12,7 @@
         <result property="userPassword" column="user_password"/>
         <result property="userHp" column="user_hp"/>
         <result property="userRegDt" column="user_reg_dt"/>
+        <result property="userRole" column="user_role"/>
     </resultMap>
 
     <!-- 공통 사용자 리스트 조회 쿼리 -->
@@ -24,7 +25,7 @@
     <!-- 공통 컬럼 목록 정의 -->
     <sql id="userSelectColumns">
         user_uuid, user_id, user_password, user_email
-        , user_name, user_role, user_reg_dt, user_last_login_dt
+        , user_name, user_role, user_hp, user_reg_dt, user_last_login_dt
     </sql>
 
     <!-- user_name으로 사용자 조회 -->

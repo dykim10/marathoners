@@ -1,6 +1,7 @@
 package com.project.marathon.service;
 
 import com.project.marathon.dto.UserResponse;
+import com.project.marathon.dto.UserSessionDto;
 import com.project.marathon.entity.User;
 import com.project.marathon.mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -104,39 +105,43 @@ public class AuthService {
     }
 
     //세션 확인 로직 (기존 컨트롤러에서 이동)
-    public ResponseEntity<Map<String, Object>> getSession(HttpServletRequest request) {
+    public ResponseEntity<?> getSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            //logger.info("세션 없음 - 요청된 JSESSIONID: {}", request.getRequestedSessionId());
+            logger.info("세션 없음 - 요청된 JSESSIONID: {}", request.getRequestedSessionId());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음"));
-            //return ResponseEntity.ok(Map.of("message", "로그인되지 않은 상태"));
-
         }
 
-//        logger.info("🔹 요청된 JSESSIONID: {}", request.getRequestedSessionId());
-//        logger.info("🔹 실제 세션 ID: {}", session.getId());
-//        logger.info("🔹 세션 속성 목록: {}", session.getAttributeNames());
-
-        //세션이 존재하지만 `SPRING_SECURITY_CONTEXT`가 없으면 로그인 상태가 아닌 것으로 판단
         Object securityContext = session.getAttribute("SPRING_SECURITY_CONTEXT");
         if (securityContext == null) {
-            //logger.info("SPRING_SECURITY_CONTEXT 없음 - JSESSIONID: {}", session.getId());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션 없음 (SPRING_SECURITY_CONTEXT 없음)"));
-            //return ResponseEntity.ok(Map.of("message", "SPRING_SECURITY_CONTEXT"));
+            logger.info("SPRING_SECURITY_CONTEXT 없음 - JSESSIONID: {}", session.getId());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "SPRING_SECURITY_CONTEXT 없음"));
         }
 
-        //`SecurityContextHolder`에서 인증 정보 가져오기
+        // SecurityContextHolder에서 인증 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
-            //logger.info("인증되지 않음 - JSESSIONID: {}", session.getId());
+            logger.info("인증되지 않음 - JSESSIONID: {}", session.getId());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "인증되지 않은 사용자"));
-            //return ResponseEntity.ok(Map.of("message", "인증되지 않은 사용자"));
         }
 
-        String userName = authentication.getName();
-        //logger.info("세션 유지됨 - JSESSIONID: {}, 사용자: {}", session.getId(), userName);
+        // 사용자 정보 추출
+        String userId = authentication.getName();
 
-        return ResponseEntity.ok(Map.of("userName", userName));
+        // 🔹 DB에서 사용자 정보 조회
+        UserResponse user = userMapper.findByUserId(userId);
+        if (user == null) {
+            logger.info("DB에서 사용자 정보를 찾을 수 없음 - userId: {}", userId);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "사용자 정보 없음"));
+        }
+
+        String userRole = user.getUserRole(); // DB에서 가져온 Role
+        logger.info("세션 유지됨 - JSESSIONID: {}, 사용자: {}, 역할: {}", session.getId(), userId, userRole);
+
+        // UserSessionDto 생성
+        UserSessionDto userSessionDto = new UserSessionDto(userId, userRole);
+
+        return ResponseEntity.ok(userSessionDto);
     }
 
     // 로그아웃 로직 (기존 컨트롤러에서 이동)
