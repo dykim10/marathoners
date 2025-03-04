@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button, Container, Card, Table } from "react-bootstrap";
-import { RACE_TYPES } from "@/constants/raceTypes"; // ✅ RACE_TYPES import
+import { RACE_TYPES } from "@/constants/raceTypes";
+import {checkSession} from "@/utils/session"; // ✅ RACE_TYPES import
 
 export default function RaceDetailPage() {
     const { mrUuid } = useParams();
@@ -16,6 +17,13 @@ export default function RaceDetailPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const verifySession = async () => {
+            const sessionExists = await checkSession();
+            setIsLoggedIn(sessionData.success);
+            setUser(sessionData.user);
+
+        };
+
         const fetchRaceDetails = async () => {
             try {
                 const res = await fetch(`/api/race/view/${mrUuid}`);
@@ -32,6 +40,7 @@ export default function RaceDetailPage() {
             }
         };
 
+        verifySession();
         fetchRaceDetails();
     }, [mrUuid]);
 
