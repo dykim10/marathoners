@@ -18,7 +18,7 @@ export default function RaceDetailPage() {
 
     useEffect(() => {
         const verifySession = async () => {
-            const sessionExists = await checkSession();
+            const sessionData = await checkSession();
             setIsLoggedIn(sessionData.success);
             setUser(sessionData.user);
 
