@@ -11,14 +11,18 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const verifySession = async () => {
-            if (await checkSession()) {
+            const sessionData = await checkSession();
+            if (sessionData.success) {
                 setIsLoggedIn(true);
-                router.push("/"); // 이미 로그인된 경우 홈으로 리디렉트
+                setUser(sessionData.user);
+                router.push("/"); // 로그인된 경우 홈으로 리디렉트
             } else {
                 setIsLoggedIn(false);
+                setUser(null);
             }
         };
 
