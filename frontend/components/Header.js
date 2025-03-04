@@ -8,12 +8,16 @@ import Link from "next/link";
 
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+
     const router = useRouter();
 
     useEffect(() => {
         const verifySession = async () => {
             const sessionExists = await checkSession();
-            setIsLoggedIn(sessionExists);
+            setIsLoggedIn(sessionData.success);
+            setUser(sessionData.user);
+
         };
         verifySession();
     }, []);
@@ -28,7 +32,7 @@ export default function Header() {
                 method: "POST",
                 credentials: "include",
             });
-            setIsLoggedIn(false);
+            setIsLoggedIn(sessionData.success);
             window.location.href = "/";
         } catch (error) {
             console.error("로그아웃 실패:", error);

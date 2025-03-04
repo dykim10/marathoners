@@ -12,18 +12,21 @@ import "slick-carousel/slick/slick-theme.css";
 export default function Home() {
     const router = useRouter();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+
     const [raceList, setRaceList] = useState([]); // ✅ 대회 데이터 저장
 
     useEffect(() => {
         const verifySession = async () => {
             try {
-                const sessionExists = await checkSession();
-                setIsLoggedIn(sessionExists);
+                const sessionData = await checkSession();
+                setIsLoggedIn(sessionData.success);
+                setUser(sessionData.user);
+
             } catch (error) {
                 console.error("세션 확인 중 오류 발생:", error);
             }
         };
-
         verifySession();
         fetchRaceList();
     }, []);
