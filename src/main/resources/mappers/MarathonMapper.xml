@@ -71,7 +71,7 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
     </sql>
 
     <!-- tb_marathon_race에 데이터 삽입 후 UUID 반환 -->
-    <insert id="insertMarathonRace" parameterType="MarathonRequestDto" useGeneratedKeys="true" keyProperty="mrUuid">
+    <insert id="insertMarathonRaceData" parameterType="MarathonRequestDto" useGeneratedKeys="true" keyProperty="mrUuid">
         INSERT INTO tb_marathon_race (mr_uuid, mr_name, mr_start_dt, mr_location, mr_company, mr_content, mr_homepage_url)
         VALUES (#{mrUuid, typeHandler=com.project.marathon.config.UUIDTypeHandler}, #{mrName}, #{mrStartDt}, #{mrLocation}, #{mrCompany}, #{mrContent}, #{mrHomepageUrl})
     </insert>
@@ -84,6 +84,23 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
             (#{mrUuid, jdbcType=VARCHAR}, #{detail.mrCourseType}, #{detail.mrCoursePrice}, #{detail.mrCourseCapacity}, #{detail.mrCourseTypeEtcText})
         </foreach>
     </insert>
+
+
+    <update id="updateMarathonRaceData" parameterType="MarathonRequestDto">
+        update tb_marathon_race
+        set
+            mr_name = #{mrName}
+          , mr_start_dt = #{mrStartDt}
+          , mr_location = #{mrLocation}
+          , mr_content = #{mrConent}
+          , mr_company = #{mrCompany}
+          , mr_etc_memo = #{mrEtcMemo}
+          , mr_homepage_url = #{mrHomepageUrl}
+          , mr_mod_dt = now()
+          , mr_mod_adm = #{mrModAdm}
+        where mr_uuid = #{mrUuid, typeHandler=com.project.marathon.config.UUIDTypeHandler}
+
+    </update>
 
     <!-- 최종 SELECT 문 (공통 SQL 포함) -->
     <select id="getMarathonRaceList" parameterType="MarathonRequestDto" resultMap="raceResultMap">
@@ -102,7 +119,7 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
     <!-- 기본 대회 정보 조회 -->
     <select id="getMarathonDetail" parameterType="String" resultMap="raceResultMap">
         SELECT * FROM tb_marathon_race
-        WHERE mr_uuid = #{mrUuid}
+        WHERE mr_uuid = #{mrUuid, typeHandler=com.project.marathon.config.UUIDTypeHandler}
     </select>
 
     <!-- 최신 코스 정보 조회 (mr_course_version 기준 최신순) -->
@@ -111,4 +128,6 @@ MyBatis XML 내에서 mapper 태그의 올바른 순서
         WHERE mr_uuid = #{mrUuid}
         ORDER BY mr_course_version DESC
     </select>
+
+
 </mapper>
