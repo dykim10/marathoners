@@ -35,7 +35,6 @@ export default function MarathonRaceModify({ initialData = null }) {
             }
 
             try {
-                console.log("? => " + mrUuid);
                 const res = await fetch(`/api/race/view/${mrUuid}`);
                 if (!res.ok) throw new Error("Failed to fetch race details");
 
@@ -43,7 +42,7 @@ export default function MarathonRaceModify({ initialData = null }) {
                 console.log("Fetched Race Data:", resData); // ✅ 데이터 확인
 
                 // raceCourseDetails가 undefined일 경우 빈 배열([])을 기본값으로 설정
-                const raceCourses = resData.raceCourseDetails || [];
+                const raceCourses = resData.raceCourseDetailList || []; //대회에 상속된, 지원하는, 코스 데이터
                 const raceData = resData.raceInfo;
                 // API에서 받은 데이터를 상태에 저장
                 setFormData({
@@ -264,48 +263,57 @@ export default function MarathonRaceModify({ initialData = null }) {
                         {/* 대회 유형 선택 (체크박스 + 입력 필드 한 줄 배치) */}
                         <Form.Group className="mb-3">
                             <Form.Label>대회 유형</Form.Label>
-                            {RACE_TYPES.map(({ key, label }) => (
-                                <Row key={key} className="align-items-center mb-2">
-                                    <Col xs="auto">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label={label}
-                                            checked={formData?.selectedRaceTypes?.includes(key) || false} // ✅ undefined 방지
-                                            onChange={() => handleRaceTypeChange(key)}
-                                        />
-                                    </Col>
-                                    {formData.selectedRaceTypes.includes(key) && (
-                                        <>
-                                            <Col>
-                                                <Form.Control
-                                                    type="number"
-                                                    placeholder="가격"
-                                                    value={formData.raceCourseDetails[key]?.mrCoursePrice || ""}
-                                                    onChange={(e) => handleInputChange(key, "mrCoursePrice", e.target.value)}
-                                                />
-                                            </Col>
-                                            <Col>
-                                                <Form.Control
-                                                    type="number"
-                                                    placeholder="모집 인원"
-                                                    value={formData.raceCourseDetails[key]?.mrCourseCapacity || ""}
-                                                    onChange={(e) => handleInputChange(key, "mrCourseCapacity", e.target.value)}
-                                                />
-                                            </Col>
-                                            {key === "ETC_COURSE" && (
+                            {RACE_TYPES.map(({ key, label }) => {
+                                const isChecked = formData?.selectedRaceTypes?.includes(key) || false; // ✅ 체크박스 상태 자동 반영
+                                const courseDetails = formData?.raceCourseDetails?.[key] || {}; // ✅ 필드 자동 입력
+                                console.log("? => ", key);
+
+                                return (
+                                    <Row key={key} className="align-items-center mb-2">
+                                        {/* 체크박스 */}
+                                        <Col xs="auto">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label={label}
+                                                checked={isChecked}
+                                                onChange={() => handleRaceTypeChange(key)}
+                                            />
+                                        </Col>
+
+                                        {/* 선택된 경우 입력 필드 표시 */}
+                                        {isChecked && (
+                                            <>
                                                 <Col>
                                                     <Form.Control
-                                                        type="text"
-                                                        placeholder="기타 내용"
-                                                        value={formData.raceCourseDetails[key]?.mrCourseEtcText || ""}
-                                                        onChange={(e) => handleInputChange(key, "mrCourseEtcText", e.target.value)}
+                                                        type="number"
+                                                        placeholder="가격"
+                                                        value={courseDetails.mrCoursePrice || ""}
+                                                        onChange={(e) => handleInputChange(key, "mrCoursePrice", e.target.value)}
                                                     />
                                                 </Col>
-                                            )}
-                                        </>
-                                    )}
-                                </Row>
-                            ))}
+                                                <Col>
+                                                    <Form.Control
+                                                        type="number"
+                                                        placeholder="모집 인원"
+                                                        value={courseDetails.mrCourseCapacity || ""}
+                                                        onChange={(e) => handleInputChange(key, "mrCourseCapacity", e.target.value)}
+                                                    />
+                                                </Col>
+                                                {key === "ETC_COURSE" && (
+                                                    <Col>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder="기타 내용"
+                                                            value={courseDetails.mrCourseEtcText || ""}
+                                                            onChange={(e) => handleInputChange(key, "mrCourseEtcText", e.target.value)}
+                                                        />
+                                                    </Col>
+                                                )}
+                                            </>
+                                        )}
+                                    </Row>
+                                );
+                            })}
                         </Form.Group>
 
                         {/* 설명 입력 (Toast UI Editor) */}
