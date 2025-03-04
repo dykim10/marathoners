@@ -3,7 +3,11 @@ package com.project.marathon.controller;
 import com.project.marathon.dto.MarathonRequestDto;
 import com.project.marathon.dto.MarathonResponseDto;
 import com.project.marathon.dto.RaceResponseDto;
+import com.project.marathon.dto.UserResponse;
+import com.project.marathon.enums.UserStatus;
 import com.project.marathon.service.MarathonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/marathon")
 public class MarathonController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final MarathonService marathonService;
 
     public MarathonController(MarathonService marathonService) {
@@ -59,4 +64,13 @@ public class MarathonController {
         }
         return ResponseEntity.ok(raceDetail);
     }
+
+    @PutMapping("/modify")
+    public ResponseEntity<?> modifyMarathon(@RequestBody MarathonRequestDto requestDto) {
+        logger.info("controller ::: userRequest => {}", requestDto);
+
+        RaceResponseDto response = marathonService.updateMarathonRace(requestDto);
+        return ResponseEntity.ok(response); // 성공 시 200 OK 반환
+    }
+
 }

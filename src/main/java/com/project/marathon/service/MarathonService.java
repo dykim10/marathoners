@@ -128,4 +128,10 @@ public class MarathonService {
         return resDto;
     }
 
+    public RaceResponseDto updateMarathonRace(MarathonRequestDto requestDto) {
+
+        RaceResponseDto resDto = new RaceResponseDto();
+        return resDto;
+    }
+
 }

@@ -39,7 +39,7 @@ export default function MarathonRaceModify({ initialData = null }) {
                 if (!res.ok) throw new Error("Failed to fetch race details");
 
                 const resData = await res.json();
-                console.log("Fetched Race Data:", resData); // ✅ 데이터 확인
+                //console.log("Fetched Race Data:", resData); // ✅ 데이터 확인
 
                 // raceCourseDetails가 undefined일 경우 빈 배열([])을 기본값으로 설정
                 const raceCourses = resData.raceCourseDetailList || []; //대회에 상속된, 지원하는, 코스 데이터
@@ -77,7 +77,7 @@ export default function MarathonRaceModify({ initialData = null }) {
 
     useEffect(() => {
         if(formData) {
-            console.log(formData);
+            //console.log(formData);
         }
     }, [formData]);
 
@@ -137,6 +137,8 @@ export default function MarathonRaceModify({ initialData = null }) {
         if (formData.selectedRaceTypes.length === 0) return alert("대회 유형을 하나 이상 선택하세요.");
 
         console.log("제출 데이터:", formData);
+        return;
+
         //API 요청 데이터 구성
         const requestData = {
             mrName: formData.mrName,
@@ -154,8 +156,8 @@ export default function MarathonRaceModify({ initialData = null }) {
         };
 
         try {
-            const response = await fetch("/api/race/register", {
-                method: "POST",
+            const response = await fetch("/api/race/edit", {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestData),
             });
@@ -163,7 +165,7 @@ export default function MarathonRaceModify({ initialData = null }) {
             if (!response.ok) throw new Error("서버 요청 실패");
 
             const result = await response.json();
-            alert("대회 등록 완료!");
+            alert("대회 수정 등록 완료!");
             //console.log("서버 응답:", result);
             router.push("/race/list");
 
@@ -266,7 +268,6 @@ export default function MarathonRaceModify({ initialData = null }) {
                             {RACE_TYPES.map(({ key, label }) => {
                                 const isChecked = formData?.selectedRaceTypes?.includes(key) || false; // ✅ 체크박스 상태 자동 반영
                                 const courseDetails = formData?.raceCourseDetails?.[key] || {}; // ✅ 필드 자동 입력
-                                console.log("? => ", key);
 
                                 return (
                                     <Row key={key} className="align-items-center mb-2">
