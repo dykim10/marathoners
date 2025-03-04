@@ -49,7 +49,7 @@ export default function RaceDetailPage() {
                 const sessionData = await checkSession();
                 setIsLoggedIn(sessionData.success);
                 setUser(sessionData.user);
-                setIsAdmin(sessionData.user?.userRole === "ROLE_ADMIN");
+                setIsAdmin(sessionData.user?.userRole === "ADMIN");
             } catch (err) {
                 setErrorSession(err);
             } finally {

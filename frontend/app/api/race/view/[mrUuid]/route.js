@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 
-export async function GET(req, { params }) {
-    const { mrUuid } = params;
+export async function GET(req, context) {
+    const params = await context.params; // ✅ `await` 사용하여 비동기적으로 params 가져오기
+    const { mrUuid } = params; // ✅ 안전하게 `mrUuid` 추출
 
+    console.log("mrUuid => ", mrUuid);
     if (!mrUuid) {
         return NextResponse.json({ error: "Invalid request: mrUuid is required" }, { status: 400 });
     }
