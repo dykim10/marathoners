@@ -103,3 +103,14 @@ COMMENT ON COLUMN tb_marathon_race.mr_homepage_url IS '대회 홈페이지 URL';
 CREATE INDEX idx_marathon_race_start_date ON tb_marathon_race(mr_start_dt);
 CREATE INDEX idx_marathon_race_reg_date ON tb_marathon_race(mr_reg_dt);
 CREATE INDEX idx_marathon_race_name ON tb_marathon_race(mr_name);
+
+
+CREATE TABLE tb_marathon_event (
+                                   id SERIAL PRIMARY KEY,
+                                   name VARCHAR(255) NOT NULL,
+                                   date DATE NOT NULL,
+                                   courseType VARCHAR(255),
+                                   location VARCHAR(255),
+                                   website VARCHAR(255),
+                                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

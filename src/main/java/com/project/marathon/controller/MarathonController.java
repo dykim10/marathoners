@@ -1,9 +1,6 @@
 package com.project.marathon.controller;
 
-import com.project.marathon.dto.MarathonRequestDto;
-import com.project.marathon.dto.MarathonResponseDto;
-import com.project.marathon.dto.RaceResponseDto;
-import com.project.marathon.dto.UserResponse;
+import com.project.marathon.dto.*;
 import com.project.marathon.enums.UserStatus;
 import com.project.marathon.service.MarathonService;
 import org.slf4j.Logger;
@@ -71,6 +68,19 @@ public class MarathonController {
 
         RaceResponseDto response = marathonService.updateMarathonRace(requestDto);
         return ResponseEntity.ok(response); // 성공 시 200 OK 반환
+    }
+
+    // 크롤링 실행 (수동 실행)
+    @GetMapping("/crawl")
+    public String crawlMarathonEvents() {
+        marathonService.crawlAndSaveMarathonEvents();
+        return "크롤링 및 데이터 저장 완료";
+    }
+
+    // crawl 저장된 마라톤 일정 조회
+    @GetMapping("/crawl/list")
+    public List<MarathonEventDto> getAllEvents() {
+        return marathonService.getAllEvents();
     }
 
 }

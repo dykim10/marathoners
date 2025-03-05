@@ -1,5 +1,6 @@
 package com.project.marathon.mapper;
 
+import com.project.marathon.dto.MarathonEventDto;
 import com.project.marathon.dto.MarathonRequestDto;
 import com.project.marathon.dto.MarathonResponseDto;
 import com.project.marathon.dto.RaceCourseDetailDto;
@@ -24,4 +25,7 @@ public interface MarathonMapper {
     MarathonResponseDto getMarathonDetail(String mrUuid);
     List<RaceCourseDetailDto> getLatestRaceCourseList(String mrUuid);
 
+    //ㅋ크롤링
+    void insertMarathonEvent(MarathonEventDto event);
+    List<MarathonEventDto> getAllMarathonEvents();
 }

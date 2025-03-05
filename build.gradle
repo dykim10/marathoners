@@ -37,6 +37,10 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
+    implementation 'org.seleniumhq.selenium:selenium-devtools-v134:4.25.0'
+
     // PostgreSQL 드라이버
     // MyBatis 연동
     // P6Spy for SQL Logging
