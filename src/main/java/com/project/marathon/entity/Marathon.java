@@ -35,4 +35,8 @@ public class Marathon {
     private String mrEtcMemo;
     // 대회 홈페이지 URL
     private String mrHomepageUrl;
+
+    // 대회정보 수정 관리자
+    private String mrModAdm;
+    
 }

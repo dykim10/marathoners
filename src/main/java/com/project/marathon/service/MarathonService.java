@@ -92,7 +92,7 @@ public class MarathonService {
             requestDto.setMrUuid(UUID.randomUUID());
 
             // tb_marathon_race 테이블에 1행 INSERT
-            int result = marathonMapper.insertMarathonRace(requestDto);
+            int result = marathonMapper.insertMarathonRaceData(requestDto);
             if (result <= 0) {
                 throw new RuntimeException("tb_marathon_race INSERT 실패!");
             }
@@ -125,6 +125,14 @@ public class MarathonService {
         RaceResponseDto resDto = new RaceResponseDto();
         resDto.setRaceInfo(raceInfo);
         resDto.setRaceCourseDetailList(raceCourseList);
+        return resDto;
+    }
+
+    public RaceResponseDto updateMarathonRace(MarathonRequestDto requestDto) {
+
+        int resultCode = marathonMapper.updateMarathonRaceData(requestDto);
+
+        RaceResponseDto resDto = new RaceResponseDto();
         return resDto;
     }
 

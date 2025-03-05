@@ -11,10 +11,12 @@ import java.util.List;
 @Mapper
 public interface MarathonMapper {
     //tb_marathon_race에 1행 INSERT 후 UUID 반환
-    int insertMarathonRace(MarathonRequestDto requestDto);
+    int insertMarathonRaceData(MarathonRequestDto requestDto);
+    int updateMarathonRaceData(MarathonRequestDto requestDto);
 
     //tb_marathon_course에 raceDetail 데이터 INSERT
     void insertMarathonCourse(String mrUuid, @Param("raceCourseDetails") List<RaceCourseDetailDto> raceCourseDetails);
+    void updateMarathonCourse(String mrUuid, @Param("raceCourseDetails") List<RaceCourseDetailDto> raceCourseDetails);
 
     List<MarathonResponseDto> getMarathonRaceList(MarathonRequestDto requestDto);
     int getMarathonRaceTotalCount(MarathonRequestDto requestDto);
