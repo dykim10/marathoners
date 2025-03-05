@@ -64,10 +64,11 @@ export default function Home() {
     };
 
     return (
-        <Container className="mt-5 text-center">
+        <Container className="container-lg mt-5 text-center">
             {/* ✅ 헤딩 섹션 */}
-            <h1 className="fw-bold">Marathoners</h1>
-            <hr />
+            <h1 className="fw-bold">Welcome to Marathoners</h1>
+            <p className="text-muted">마라톤을 사랑하는 이들을 위한 공간</p>
+            <hr/>
 
             {/* ✅ 대회 일정 스와이프 섹션 */}
             <Container className="mb-5">
@@ -83,7 +84,8 @@ export default function Home() {
                                     <Card.Text>
                                         <strong>장소:</strong> {race.mrLocation}
                                     </Card.Text>
-                                    <Button variant="primary" size="sm" onClick={() => router.push(`/race/view/${race.mrUuid}`)}>
+                                    <Button variant="primary" size="sm"
+                                            onClick={() => router.push(`/race/view/${race.mrUuid}`)}>
                                         상세보기
                                     </Button>
                                 </Card.Body>
@@ -98,20 +100,32 @@ export default function Home() {
             {/* ✅ 기능 버튼 섹션 */}
             <Container>
                 <Row className="justify-content-center">
-                    <Col md={3} className="mb-3">
-                        <Button variant="outline-primary" size="lg" className="w-100" onClick={() => handleNavigation("/race/list")}>
-                            대회 정보
-                        </Button>
+                    <Col md={4} className="mb-3">
+                        <Card className="shadow-sm">
+                            <Card.Body>
+                                <Card.Title>🏅 대회 일정</Card.Title>
+                                <Card.Text>다가오는 마라톤 대회를 확인하세요.</Card.Text>
+                                <Button variant="primary" onClick={() => handleNavigation("/race/list")}>더 보기</Button>
+                            </Card.Body>
+                        </Card>
                     </Col>
-                    <Col md={3} className="mb-3">
-                        <Button variant="outline-success" size="lg" className="w-100" onClick={() => handleNavigation("/user/list")}>
-                            회원 정보
-                        </Button>
+                    <Col md={4} className="mb-3">
+                        <Card className="shadow-sm">
+                            <Card.Body>
+                                <Card.Title>📝 대회 리뷰</Card.Title>
+                                <Card.Text>참가자들의 솔직한 리뷰를 읽어보세요.</Card.Text>
+                                <Button variant="success" onClick={() => handleNavigation("/review/list")}>더 보기</Button>
+                            </Card.Body>
+                        </Card>
                     </Col>
-                    <Col md={3} className="mb-3">
-                        <Button variant="outline-warning" size="lg" className="w-100" onClick={() => handleNavigation("/feature3")}>
-                            기타 기능
-                        </Button>
+                    <Col md={4} className="mb-3">
+                        <Card className="shadow-sm">
+                            <Card.Body>
+                                <Card.Title>📌 기타 메뉴</Card.Title>
+                                <Card.Text>마라톤 관련 다양한 정보를 제공합니다.</Card.Text>
+                                <Button variant="warning" onClick={() => handleNavigation("/feature3")}>더 보기</Button>
+                            </Card.Body>
+                        </Card>
                     </Col>
                 </Row>
             </Container>

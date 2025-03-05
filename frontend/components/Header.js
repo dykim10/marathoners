@@ -49,21 +49,18 @@ export default function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="메뉴1" id="menu1-dropdown">
-                            <NavDropdown.Item as={Link} href="/menu1/sub1">서브메뉴1</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} href="/menu1/sub2">서브메뉴2</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown title="메뉴2" id="menu2-dropdown">
-                            <NavDropdown.Item as={Link} href="/menu2/sub1">서브메뉴1</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} href="/menu2/sub2">서브메뉴2</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown title="메뉴3" id="menu3-dropdown">
-                            <NavDropdown.Item as={Link} href="/menu3/sub1">서브메뉴1</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} href="/menu3/sub2">서브메뉴2</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown title="메뉴4" id="menu4-dropdown">
-                            <NavDropdown.Item as={Link} href="/menu4/sub1">서브메뉴1</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} href="/menu4/sub2">서브메뉴2</NavDropdown.Item>
+                        {/* ✅ 대회 일정 */}
+                        <Nav.Link href="/race/list">대회 일정</Nav.Link>
+
+                        {/* ✅ 대회 리뷰 */}
+                        <Nav.Link href="/review/list">대회 리뷰</Nav.Link>
+
+                        {/* ✅ 주요 대회 (하드코딩된 서브메뉴 포함) */}
+                        <NavDropdown title="주요 대회" id="major-races-dropdown">
+                            <NavDropdown.Item href="/major/marathon1">🏅 서울 마라톤</NavDropdown.Item>
+                            <NavDropdown.Item href="/major/marathon2">🏅 부산 마라톤</NavDropdown.Item>
+                            <NavDropdown.Item href="/major/marathon3">🏅 대구 국제 마라톤</NavDropdown.Item>
+                            <NavDropdown.Item href="/major/marathon4">🏅 춘천 마라톤</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
 
