@@ -4,8 +4,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.project'
-version = '0.0.1-SNAPSHOT'
+group = 'com.project'.toString()
+version = '0.0.1-SNAPSHOT'.toString()
 
 java {
     toolchain {
@@ -37,9 +37,13 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+    // Jsoup (HTML 파싱)
     implementation 'org.jsoup:jsoup:1.15.3'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
-    implementation 'org.seleniumhq.selenium:selenium-devtools-v134:4.25.0'
+
+    // Selenium 및 WebDriver 자동 설치
+    implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'  // ✅ Selenium 기본 패키지
+    implementation 'io.github.bonigarcia:webdrivermanager:5.7.0'  // ✅ WebDriver 자동설치 도구
+
 
     // PostgreSQL 드라이버
     // MyBatis 연동
